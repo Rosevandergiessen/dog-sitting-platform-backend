@@ -1,1 +1,1 @@
-# dog-sitting-platform-backend
+# Boolean final project: Dog sitting platform
