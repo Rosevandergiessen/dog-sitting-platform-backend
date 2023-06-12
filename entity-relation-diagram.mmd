@@ -5,8 +5,10 @@ erDiagram
     DogOwner ||--|{ DogSittingRequest : creates
     DogOwner }|--o{ Rating : has
     DogSitter }|--o{ Rating : has
-    User ||--|{ Friend : has
-    User ||--|{ Friend : has
+    DogSitter }o -- o{ DogOwner : has
+    DogOwner }o -- o{ DogSitter : has
+    DogSitter ||--|{ DogSittingRequest : accepts
+
 
 User {
 int id
@@ -18,11 +20,15 @@ string password
 DogOwner {
 int id
 int user_id
+List dogs
+List dogSitters
 }
 
 DogSitter {
 int id
 int user_id
+List dogOwners
+List dogSittingRequests
 }
 
 Dog {
@@ -36,11 +42,11 @@ sting description
 
 DogSittingRequest {
 int id
-int owner_id
+int dog_id
 int sitter_id
-LocalDate startDate
-LocalDate endDate
-String status
+DateTime start
+DateTime end
+boolean accepted
 }
 
 Rating {
@@ -49,11 +55,4 @@ int owner_id
 int sitter_id
 int rating
 string comment
-}
-
-Friend {
-int id
-int user_id
-int friend_id
-string friendStatus
 }
