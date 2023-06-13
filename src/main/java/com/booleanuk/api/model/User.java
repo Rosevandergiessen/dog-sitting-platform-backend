@@ -19,12 +19,6 @@ public class User {
     @Column(name = "password")
     private String password;
 
-    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
-    private DogOwner dogOwner;
-
-    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
-    private DogSitter dogSitter;
-
     // Constructors
     public User(){
         super();

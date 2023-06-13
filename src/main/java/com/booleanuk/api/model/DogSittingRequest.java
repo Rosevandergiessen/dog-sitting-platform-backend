@@ -14,12 +14,12 @@ public class DogSittingRequest {
     private int id;
 
     @ManyToOne
-    @JoinColumn(name = "dog_id")
+    @JoinColumn(name = "dog_id", nullable = false)
     private Dog dog;
 
     @ManyToOne
     @JoinColumn(name = "sitter_id")
-    private DogSitter sitter;
+    private User sitter;
 
     @Column(name = "start")
     private LocalDate start;
@@ -35,7 +35,7 @@ public class DogSittingRequest {
         super();
     }
 
-    public DogSittingRequest(Dog dog, DogSitter sitter, LocalDate startTime, LocalDateTime endTime, boolean accepted) {
+    public DogSittingRequest(Dog dog, User sitter, LocalDate startTime, LocalDateTime endTime, boolean accepted) {
         super();
         this.dog = dog;
         this.sitter = sitter;
@@ -44,7 +44,7 @@ public class DogSittingRequest {
         this.accepted = accepted;
     }
 
-    public DogSittingRequest(int id, Dog dog, DogSitter sitter, LocalDate startTime, LocalDateTime endTime) {
+    public DogSittingRequest(int id, Dog dog, User sitter, LocalDate startTime, LocalDateTime endTime) {
         this.id = id;
         this.dog = dog;
         this.sitter = sitter;
@@ -70,11 +70,11 @@ public class DogSittingRequest {
         this.dog = dog;
     }
 
-    public DogSitter getSitter() {
+    public User getSitter() {
         return this.sitter;
     }
 
-    public void setSitter(DogSitter sitter) {
+    public void setSitter(User sitter) {
         this.sitter = sitter;
     }
 

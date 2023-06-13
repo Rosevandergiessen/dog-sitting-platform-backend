@@ -11,7 +11,7 @@ public class Dog {
 
     @ManyToOne
     @JoinColumn(name = "owner_id")
-    private DogOwner owner;
+    private User owner;
 
     @Column(name = "name")
     private String name;
@@ -39,7 +39,6 @@ public class Dog {
     }
 
     // Getters & Setters
-
     public int getId() {
         return id;
     }
@@ -48,11 +47,11 @@ public class Dog {
         this.id = id;
     }
 
-    public DogOwner getOwner() {
+    public User getOwner() {
         return owner;
     }
 
-    public void setOwner(DogOwner owner) {
+    public void setOwner(User owner) {
         this.owner = owner;
     }
 

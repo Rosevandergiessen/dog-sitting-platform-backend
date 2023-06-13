@@ -1,34 +1,14 @@
 erDiagram
-    User }|--o{ DogOwner : is
-    User }|--o{ DogSitter : is
-    DogOwner ||--|{ Dog : owns
-    DogOwner ||--|{ DogSittingRequest : creates
-    DogOwner }|--o{ Rating : has
-    DogSitter }|--o{ Rating : has
-    DogSitter }o -- o{ DogOwner : has
-    DogOwner }o -- o{ DogSitter : has
-    DogSitter ||--|{ DogSittingRequest : accepts
-
+    User ||--|{ Dog : owns
+    User ||--|{ Comment : creates
+    User ||--|{ DogSittingRequest : creates
+    User ||--|{ DogSittingRequest : accepts
 
 User {
 int id
 string name
 string email
 string password
-}
-
-DogOwner {
-int id
-int user_id
-List dogs
-List dogSitters
-}
-
-DogSitter {
-int id
-int user_id
-List dogOwners
-List dogSittingRequests
 }
 
 Dog {
@@ -49,9 +29,9 @@ DateTime end
 boolean accepted
 }
 
-Rating {
+Comment {
 int id
-int owner_id
+int dog_id
 int sitter_id
 int rating
 string comment
