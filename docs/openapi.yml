@@ -1,0 +1,387 @@
+openapi: 3.0.3
+info:
+  title: Java Cinema API Challenge - Core Criteria
+  description: |-
+  version: 0.2.2
+
+servers:
+  - url: http://localhost:8080
+tags:
+  - name: users
+  - name: dogs
+  - name: requests
+  - name: friendships
+paths:
+  /users:
+    post:
+      tags:
+        - users
+      summary: Create a User
+      description: Create a new user account.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateUser'
+      responses:
+        201:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+    get:
+      tags:
+        - users
+      summary: Get all users
+      description: Get a list of every user.
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AllUsers'
+  /users/{id}:
+    put:
+      tags:
+        - users
+      summary: Update a user
+      description: Update an existing user. For ease of implementation, all fields are required from the client.
+      parameters:
+        - name: id
+          in: path
+          description: The ID of the user to update
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateUser'
+      responses:
+        201:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+    get:
+      tags:
+        - users
+      summary: Get an user by ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: ID of the user
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+    delete:
+      tags:
+        - users
+      summary: Delete a user
+      description: Delete an existing user. When deleting data, it's useful to send the deleted record back to the client so they can re-create it if deletion was a mistake.
+      parameters:
+        - name: id
+          in: path
+          description: The ID of the user to delete
+          required: true
+          schema:
+            type: integer
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+  /dogs:
+    get:
+      tags:
+        - dogs
+      summary: Get all dogs
+      description: Get a list of every dog.
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AllDogs'
+
+  /dogs/{id}:
+    get:
+      tags:
+        - dogs
+      summary: Get a dog by ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: ID of the dog
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Dog'
+    put:
+      tags:
+        - dogs
+      summary: Update a dog
+      description: Update an existing dog. For ease of implementation, all fields are required from the client.
+      parameters:
+        - name: id
+          in: path
+          description: The ID of the dog to update
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateDog'
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Dog'
+    post:
+      tags:
+        - dogs
+      summary: Create a dog
+      description: Create a new dog.
+      parameters:
+        - name: userId
+          in: path
+          description: The ID of the user associated with the dog
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateDog'
+      responses:
+        201:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Dog'
+    delete:
+      tags:
+        - dogs
+      summary: Delete a dog
+      description: Delete an existing dog. When deleting data, it's useful to send the deleted record back to the client so they can re-create it if deletion was a mistake.
+      parameters:
+        - name: id
+          in: path
+          description: The ID of the dog to delete
+          required: true
+          schema:
+            type: integer
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Dog'
+  /friendships:
+    get:
+      tags:
+        - friendships
+      summary: Get all friendships
+      description: Get a list of all friendships.
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AllFriendships'
+    post:
+      tags:
+        - friendships
+      summary: Create a friendship
+      description: Create a new friendship between two users.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateFriendship'
+      responses:
+        201:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Friendship'
+  /friendships/{id}:
+      get:
+        tags:
+          - friendships
+        summary: Get a friendship by ID
+        parameters:
+          - name: id
+            in: path
+            required: true
+            schema:
+              type: integer
+            description: ID of the friendship
+        responses:
+          '200':
+            description: OK
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/Friendship'
+      put:
+        tags:
+          - friendships
+        summary: Update a friendship
+        description: Update an existing friendship. For ease of implementation, all fields are required from the client.
+        parameters:
+          - name: id
+            in: path
+            description: The ID of the friendship to update
+            required: true
+            schema:
+              type: integer
+        requestBody:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Friendship'
+        responses:
+          200:
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/Friendship'
+      delete:
+        tags:
+          - friendships
+        summary: Delete a friendship
+        description: Delete an existing friendship. When deleting data, it's useful to send the deleted record back to the client so they can re-create it if deletion was a mistake.
+        parameters:
+          - name: id
+            in: path
+            description: The ID of the friendship to delete
+            required: true
+            schema:
+              type: integer
+        responses:
+          200:
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/Friendship'
+
+components:
+  schemas:
+    CreateUser:
+      type: object
+      required: [username, email, password]
+      properties:
+        name:
+          type: string
+          example: Rose123
+        email:
+          type: email
+          format: email
+          example: rose@email.com
+        phone:
+          type: string
+          example: Rose123
+    User:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        username:
+          type: string
+          example: Rose123
+        email:
+          type: string
+          example: rose@email.com
+        password:
+          type: string
+          example: Rose123
+    AllUsers:
+      type: array
+      items:
+        $ref: '#/components/schemas/User'
+    CreateDog:
+      type: object
+      required: [ name, breed, age, description ]
+      properties:
+        name:
+          type: string
+          example: Buddy
+        breed:
+          type: string
+          example: Labrador Retriever
+        age:
+          type: integer
+          example: 3
+        description:
+          type: string
+          example: Friendly and playful dog
+    Dog:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        user:
+          $ref: '#/components/schemas/User'
+        name:
+          type: string
+          example: Buddy
+        breed:
+          type: string
+          example: Labrador Retriever
+        age:
+          type: integer
+          example: 3
+        description:
+          type: string
+          example: Friendly and playful dog
+    AllDogs:
+      type: array
+      items:
+        $ref: '#/components/schemas/Dog'
+    CreateFriendship:
+      type: object
+      required: [ userId1, userId2 ]
+      properties:
+        userId1:
+          type: integer
+          example: 1
+        userId2:
+          type: integer
+          example: 2
+    Friendship:
+        type: object
+        properties:
+          id:
+            type: integer
+            example: 1
+          user1:
+            $ref: '#/components/schemas/User'
+          user2:
+            $ref: '#/components/schemas/User'
+
+    AllFriendships:
+        type: array
+        items:
+          $ref: '#/components/schemas/Friendship'
