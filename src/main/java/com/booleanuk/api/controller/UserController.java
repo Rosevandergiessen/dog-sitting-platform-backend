@@ -4,7 +4,6 @@ import com.booleanuk.api.model.User;
 import com.booleanuk.api.service.DogService;
 import com.booleanuk.api.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -49,10 +48,4 @@ public class UserController {
     public ResponseEntity<User> deleteUser(@PathVariable("id") int id) {
         return ResponseEntity.ok(userService.deleteUser(id));
     }
-
-    // create dog from user
-     @PostMapping("/{id}/dogs")
-    public ResponseEntity<Dog> createDog(@PathVariable("id") int id, @RequestBody Dog dog) {
-         return ResponseEntity.ok(dogService.createDog(id, dog));
-     }
 }

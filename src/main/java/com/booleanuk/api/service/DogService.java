@@ -31,12 +31,8 @@ public class DogService {
         return dogRepository.findById(id).orElse(null);
     }
 
-    public void setDogOwner(Dog dog, int userId){
-        User owner = userService.getUserById(userId);
-        dog.setUser(owner);
-    }
 
-    public Dog createDog(int id, Dog dog) {
+    public Dog createDog(Dog dog) {
         return dogRepository.save(dog);
     }
 

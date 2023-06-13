@@ -3,6 +3,8 @@ package com.booleanuk.api.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 @Table(name = "dogs")
 public class Dog {
@@ -11,7 +13,8 @@ public class Dog {
     private int id;
 
     @ManyToOne
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "user_id", nullable = false)
+    @JsonIgnore
     private User user;
 
     @Column(name = "name")
@@ -25,6 +28,10 @@ public class Dog {
 
     @Column(name = "description")
     private String description;
+
+    @OneToMany(mappedBy = "dog")
+    @JsonIgnore
+    private List<Request> requests;
 
     // Constructors
     public Dog() {
@@ -44,8 +51,8 @@ public class Dog {
         this.name = name;
         this.breed = breed;
         this.age = age;
-        this.description = description;
         this.user = user;
+        this.description = description;
     }
 
     // Getters & Setters
