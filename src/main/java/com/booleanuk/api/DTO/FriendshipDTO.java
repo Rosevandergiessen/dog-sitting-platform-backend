@@ -1,4 +1,4 @@
-package com.booleanuk.api;
+package com.booleanuk.api.DTO;
 
 
 public class FriendshipDTO {

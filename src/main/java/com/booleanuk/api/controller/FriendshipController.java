@@ -1,6 +1,6 @@
 package com.booleanuk.api.controller;
 
-import com.booleanuk.api.FriendshipDTO;
+import com.booleanuk.api.DTO.FriendshipDTO;
 import com.booleanuk.api.model.Friendship;
 import com.booleanuk.api.model.User;
 import com.booleanuk.api.service.FriendshipService;
