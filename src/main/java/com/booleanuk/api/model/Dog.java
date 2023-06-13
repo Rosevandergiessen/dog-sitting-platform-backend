@@ -1,5 +1,6 @@
 package com.booleanuk.api.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 @Entity
@@ -10,8 +11,8 @@ public class Dog {
     private int id;
 
     @ManyToOne
-    @JoinColumn(name = "owner_id")
-    private User owner;
+    @JoinColumn(name = "user_id")
+    private User user;
 
     @Column(name = "name")
     private String name;
@@ -38,6 +39,15 @@ public class Dog {
         this.description = description;
     }
 
+    public Dog(String name, String breed, int age, String description, User user) {
+        super();
+        this.name = name;
+        this.breed = breed;
+        this.age = age;
+        this.description = description;
+        this.user = user;
+    }
+
     // Getters & Setters
     public int getId() {
         return id;
@@ -47,12 +57,12 @@ public class Dog {
         this.id = id;
     }
 
-    public User getOwner() {
-        return owner;
+    public User getUser() {
+        return user;
     }
 
-    public void setOwner(User owner) {
-        this.owner = owner;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public String getName() {

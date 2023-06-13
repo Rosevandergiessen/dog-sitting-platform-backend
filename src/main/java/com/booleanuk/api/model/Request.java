@@ -6,8 +6,8 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "dog_sitting_requests")
-public class DogSittingRequest {
+@Table(name = "requests")
+public class Request {
     // Fields
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,35 +21,33 @@ public class DogSittingRequest {
     @JoinColumn(name = "sitter_id")
     private User sitter;
 
-    @Column(name = "start")
-    private LocalDate start;
+    @Column(name = "start_time")
+    private LocalDate startTime;
 
-    @Column(name = "end")
-    private LocalDateTime end;
+    @Column(name = "end_time")
+    private LocalDateTime endTime;
 
     @Column(name = "accepted")
     private boolean accepted;
 
     // Constructors
-    public DogSittingRequest() {
+    public Request() {
         super();
     }
 
-    public DogSittingRequest(Dog dog, User sitter, LocalDate startTime, LocalDateTime endTime, boolean accepted) {
+    public Request(Dog dog, User sitter, LocalDate startTime, LocalDateTime endTime, boolean accepted) {
         super();
         this.dog = dog;
         this.sitter = sitter;
-        this.start = startTime;
-        this.end = endTime;
+        this.startTime = startTime;
+        this.endTime = endTime;
         this.accepted = accepted;
     }
 
-    public DogSittingRequest(int id, Dog dog, User sitter, LocalDate startTime, LocalDateTime endTime) {
-        this.id = id;
+    public Request(Dog dog, LocalDate startTime, LocalDateTime endTime) {
         this.dog = dog;
-        this.sitter = sitter;
-        this.start = startTime;
-        this.end = endTime;
+        this.startTime = startTime;
+        this.endTime = endTime;
     }
 
     // Getters & Setters
@@ -79,19 +77,19 @@ public class DogSittingRequest {
     }
 
     public LocalDate getStartTime() {
-        return this.start;
+        return this.startTime;
     }
 
     public void setStartTime(LocalDate startTime) {
-        this.start = startTime;
+        this.startTime = startTime;
     }
 
     public LocalDateTime getEndTime() {
-        return end;
+        return endTime;
     }
 
     public void setEndTime(LocalDateTime endTime) {
-        this.end = endTime;
+        this.endTime = endTime;
     }
 
     public boolean isAccepted() {
