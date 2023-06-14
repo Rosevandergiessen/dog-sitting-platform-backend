@@ -1,5 +1,6 @@
 package com.booleanuk.api.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -23,6 +24,9 @@ public class User {
 
     @OneToMany(mappedBy = "user", cascade = { CascadeType.REMOVE, CascadeType.PERSIST })
     private List<Dog> dogs;
+
+    @OneToMany(mappedBy = "sitter", cascade = { CascadeType.REMOVE, CascadeType.PERSIST })
+    private List<Request> requests;
 
     // Constructors
     public User(){

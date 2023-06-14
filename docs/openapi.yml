@@ -284,6 +284,98 @@ paths:
               application/json:
                 schema:
                   $ref: '#/components/schemas/Friendship'
+  /requests:
+    get:
+      tags:
+        - requests
+      summary: Get all requests
+      description: Get a list of all requests.
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AllRequests'
+
+    post:
+      tags:
+        - requests
+      summary: Create a request
+      description: Create a new request.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateRequest'
+      responses:
+        201:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Request'
+
+  /requests/{id}:
+      get:
+        tags:
+          - requests
+        summary: Get a request by ID
+        parameters:
+          - name: id
+            in: path
+            required: true
+            schema:
+              type: integer
+            description: ID of the request
+        responses:
+          '200':
+            description: OK
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/Request'
+
+      put:
+        tags:
+          - requests
+        summary: Update a request
+        description: Update an existing request. For ease of implementation, all fields are required from the client.
+        parameters:
+          - name: id
+            in: path
+            description: The ID of the request to update
+            required: true
+            schema:
+              type: integer
+        requestBody:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Request'
+        responses:
+          200:
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/Request'
+
+      delete:
+        tags:
+          - requests
+        summary: Delete a request
+        description: Delete an existing request. When deleting data, it's useful to send the deleted record back to the client so they can re-create it if deletion was a mistake.
+        parameters:
+          - name: id
+            in: path
+            description: The ID of the request to delete
+            required: true
+            schema:
+              type: integer
+        responses:
+          200:
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/Request'
 
 components:
   schemas:
@@ -385,3 +477,49 @@ components:
         type: array
         items:
           $ref: '#/components/schemas/Friendship'
+
+    CreateRequest:
+      type: object
+      required: [ dogId, startTime, endTime ]
+      properties:
+        dogId:
+          type: integer
+          example: 1
+        sitterId:
+          type: integer
+          example: 2
+        startTime:
+          type: string
+          format: date
+          example: "2023-06-13"
+        endTime:
+          type: string
+          format: date-time
+          example: "2023-06-13T10:00:00"
+
+    Request:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        dog:
+          $ref: '#/components/schemas/Dog'
+        sitter:
+          $ref: '#/components/schemas/User'
+        startTime:
+          type: string
+          format: date
+          example: "2023-06-13"
+        endTime:
+          type: string
+          format: date-time
+          example: "2023-06-13T10:00:00"
+        accepted:
+          type: boolean
+          example: true
+
+    AllRequests:
+      type: array
+      items:
+        $ref: '#/components/schemas/Request'
