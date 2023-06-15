@@ -1,25 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
+import { useEffect, useState } from "react"
+import { Link, Route, Routes } from "react-router-dom"
+import DogList from "./components/DogList";
 
-function App() {
+export default function App() {
+  const [isLoading, setIsLoading] = useState(true)
+
+
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+      <>
+        <nav>
+          <h2>Menu</h2>
+          <ul>
+            {/* TODO: Make these links */}
+            <li><Link to='/'>Go to homepage</Link></li>
+            <li><Link to='/dogs'>See all Dogs</Link></li>
+          </ul>
+        </nav>
+        <main>
+          <Routes>
+            {/* TODO: Add routes here  */}
+            <Route path='/dogs' element={<DogList isLoading={{isLoading}}/>}/>
+          </Routes>
+        </main>
+      </>
+  )
 }
-
-export default App;
