@@ -4,6 +4,7 @@ import UserList from "./components/UserList";
 import DogDetails from "./components/DogDetails";
 import UserDetails from "./components/UserDetails";
 import RequestList from "./components/RequestList";
+import DogsAdd from "./components/DogsAdd";
 
 export default function App() {
   return (
@@ -25,6 +26,7 @@ export default function App() {
             <Route path='/users' element={<UserList />}/>
             <Route path='/users/:id' element={<UserDetails />}/>
             <Route path='/requests' element={<RequestList />}/>
+            <Route path='/users/:id/dogs/add' element={<DogsAdd />} />
           </Routes>
         </main>
       </>

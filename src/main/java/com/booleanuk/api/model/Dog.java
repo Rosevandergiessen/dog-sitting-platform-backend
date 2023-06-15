@@ -30,7 +30,6 @@ public class Dog {
     private String description;
 
     @OneToMany(mappedBy = "dog")
-    @JsonIgnore
     private List<Request> requests;
 
     // Constructors

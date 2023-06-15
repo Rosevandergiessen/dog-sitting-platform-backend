@@ -1,5 +1,6 @@
 package com.booleanuk.api.service;
 
+import com.booleanuk.api.model.Dog;
 import com.booleanuk.api.model.Request;
 import com.booleanuk.api.repository.RequestRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,10 @@ public class RequestService {
 
     public Request getRequestById(int id) {
         return requestRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Dog sitting request not found."));
+    }
+
+    public List<Request> getRequestByDogId(int dogId) {
+        return requestRepository.findByDogId(dogId);
     }
 
     public Request createRequest(Request request) {

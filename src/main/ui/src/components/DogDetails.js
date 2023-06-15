@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import {useParams} from "react-router-dom";
+import {Link, useParams} from "react-router-dom";
 
 const DogDetails = () => {
     const [dog, setDog] = useState(false);
+    const [requests, setRequests] = useState(false);
     const { id } = useParams()
 
     useEffect(() => {
         fetchDog();
+        fetchRequests();
     }, []);
 
     const fetchDog = async () => {
@@ -20,9 +22,24 @@ const DogDetails = () => {
         }
     };
 
+    const fetchRequests = async () => {
+        try {
+            const response = await fetch(`http://localhost:8080/dogs/${id}/requests`);
+            const data = await response.json();
+            setRequests(data);
+            console.log(data);
+        } catch (error) {
+            console.error('Error fetching requests:', error);
+        }
+    }
+
     if (!dog) {
         return <div>Loading...</div>;
     }
+
+    const requestArray = Object.values(requests)
+    const activeRequests = requestArray.filter((request) => request.accepted);
+    const pendingRequests = requestArray.filter((request) => !request.accepted);
 
     return (
         <div>
@@ -30,6 +47,30 @@ const DogDetails = () => {
             <p>Breed: {dog.breed}</p>
             <p>Age: {dog.age}</p>
             <p>Description: {dog.description}</p>
+
+            <h2>Active Request(s)</h2>
+            <ul>
+                {activeRequests.map((request) => (
+                    <li key={request.id}>
+                        <p>Dog: {request.dog.name}</p>
+                        <p>Sitter: {request.sitter ? request.sitter.username : 'Accept this request?'}</p>
+                        <p>Start Time: {request.startTime}</p>
+                        <p>End Time: {request.endTime}</p>
+                    </li>
+                ))}
+            </ul>
+            <h2>Pending Request(s)</h2>
+            <ul>
+                {pendingRequests.map((request) => (
+                    <li key={request.id}>
+                        <p>Dog: {request.dog.name}</p>
+                        <p>Sitter: {request.sitter ? request.sitter.username : 'Accept this request?'}</p>
+                        <p>Start Time: {request.startTime}</p>
+                        <p>End Time: {request.endTime}</p>
+                    </li>
+                ))}
+            </ul>
+
         </div>
     );
 };

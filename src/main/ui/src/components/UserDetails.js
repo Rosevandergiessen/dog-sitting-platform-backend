@@ -27,9 +27,6 @@ function UsersDetails() {
         try {
             const response = await fetch(`http://localhost:8080/users/${id}/friends`);
             const data = await response.json();
-            // data.map((friend) => (
-            //     console.log(friend.user2.username)
-            // ))
             setFriends(data);
             console.log(data);
         } catch (error) {
@@ -46,6 +43,8 @@ function UsersDetails() {
             <h2>{user.username}</h2>
             <p>{user.email}</p>
             <h3>Dogs</h3>
+            <Link to={`/users/${id}/dogs/add`}>Add a dog</Link>
+
             {user.dogs.map((dog) => (
                 <li key={dog.id}>
                     <Link to={`/dogs/${dog.id}`}>{dog.name}</Link>

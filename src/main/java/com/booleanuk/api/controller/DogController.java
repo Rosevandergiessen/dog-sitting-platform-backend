@@ -1,8 +1,10 @@
 package com.booleanuk.api.controller;
 
 import com.booleanuk.api.model.Dog;
+import com.booleanuk.api.model.Request;
 import com.booleanuk.api.model.User;
 import com.booleanuk.api.service.DogService;
+import com.booleanuk.api.service.RequestService;
 import com.booleanuk.api.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -21,6 +23,9 @@ public class DogController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private RequestService requestService;
+
     @GetMapping
     public ResponseEntity<List<Dog>> getDogs() {
         return ResponseEntity.ok(dogService.getAllDogs());
@@ -29,6 +34,11 @@ public class DogController {
     @GetMapping({"/{id}"})
     public ResponseEntity<Dog> getDog(@PathVariable int id) {
         return ResponseEntity.ok(dogService.getDogById(id));
+    }
+
+    @GetMapping({"/{id}/requests"})
+    public ResponseEntity<List<Request>> getRequestsByDogId(@PathVariable int id) {
+        return ResponseEntity.ok(requestService.getRequestByDogId(id));
     }
 
     @PutMapping("/{id}")
