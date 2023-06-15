@@ -2,7 +2,6 @@ package com.booleanuk.api.model;
 
 import jakarta.persistence.*;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
@@ -22,7 +21,7 @@ public class Request {
     private User sitter;
 
     @Column(name = "start_time")
-    private LocalDate startTime;
+    private LocalDateTime startTime;
 
     @Column(name = "end_time")
     private LocalDateTime endTime;
@@ -35,7 +34,7 @@ public class Request {
         super();
     }
 
-    public Request(Dog dog, User sitter, LocalDate startTime, LocalDateTime endTime, boolean accepted) {
+    public Request(Dog dog, User sitter, LocalDateTime startTime, LocalDateTime endTime, boolean accepted) {
         super();
         this.dog = dog;
         this.sitter = sitter;
@@ -44,7 +43,7 @@ public class Request {
         this.accepted = accepted;
     }
 
-    public Request(Dog dog, LocalDate startTime, LocalDateTime endTime) {
+    public Request(Dog dog, LocalDateTime startTime, LocalDateTime endTime) {
         this.dog = dog;
         this.startTime = startTime;
         this.endTime = endTime;
@@ -76,11 +75,11 @@ public class Request {
         this.sitter = sitter;
     }
 
-    public LocalDate getStartTime() {
+    public LocalDateTime getStartTime() {
         return this.startTime;
     }
 
-    public void setStartTime(LocalDate startTime) {
+    public void setStartTime(LocalDateTime startTime) {
         this.startTime = startTime;
     }
 

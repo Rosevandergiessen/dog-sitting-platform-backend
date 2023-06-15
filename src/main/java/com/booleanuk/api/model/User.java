@@ -28,6 +28,9 @@ public class User {
     @OneToMany(mappedBy = "sitter", cascade = { CascadeType.REMOVE, CascadeType.PERSIST })
     private List<Request> requests;
 
+    @OneToMany(mappedBy = "user1", cascade = { CascadeType.REMOVE, CascadeType.PERSIST })
+    private List<Friendship> friendships;
+
     // Constructors
     public User(){
         super();

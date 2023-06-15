@@ -1,7 +1,9 @@
 package com.booleanuk.api.controller;
 import com.booleanuk.api.model.Dog;
+import com.booleanuk.api.model.Friendship;
 import com.booleanuk.api.model.User;
 import com.booleanuk.api.service.DogService;
+import com.booleanuk.api.service.FriendshipService;
 import com.booleanuk.api.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -18,6 +20,9 @@ public class UserController {
     @Autowired
     private DogService dogService;
 
+    @Autowired
+    private FriendshipService friendshipService;
+
 
     @GetMapping
     public ResponseEntity<List<User>> getAllUsers() {
@@ -32,6 +37,11 @@ public class UserController {
     @GetMapping("{id}/dogs")
     public ResponseEntity<List<Dog>> getDogsByOwnerId(@PathVariable int id) {
     return ResponseEntity.ok(dogService.getDogsByOwnerId(id));
+    }
+
+    @GetMapping("{id}/friends")
+    public ResponseEntity<List<Friendship>> getFriendsByUserId(@PathVariable int id) {
+    return ResponseEntity.ok(friendshipService.getFriendshipsByUserId(id));
     }
 
     @PostMapping

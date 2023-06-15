@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import {Link} from "react-router-dom";
 
 const DogList = () => {
     const [dogs, setDogs] = useState([]);
@@ -12,20 +13,27 @@ const DogList = () => {
             const response = await fetch('http://localhost:8080/dogs');
             const data = await response.json();
             setDogs(data);
+            console.log(data);
         } catch (error) {
             console.error('Error fetching dogs:', error);
         }
     };
 
+    if (!dogs) {
+        return <div>Loading...</div>;
+    }
+
     return (
-        <div>
+        <>
             <h1>Dogs</h1>
             <ul>
                 {dogs.map((dog) => (
-                    <li key={dog.id}>{dog.name}</li>
+                    <li key={dog.id}>
+                        <Link to={`/dogs/${dog.id}`}>{dog.name}</Link>
+                    </li>
                 ))}
             </ul>
-        </div>
+        </>
     );
 };
 

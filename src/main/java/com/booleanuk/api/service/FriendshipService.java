@@ -1,5 +1,6 @@
 package com.booleanuk.api.service;
 
+import com.booleanuk.api.model.Dog;
 import com.booleanuk.api.model.User;
 import com.booleanuk.api.model.Friendship;
 import com.booleanuk.api.repository.FriendshipRepository;
@@ -29,6 +30,10 @@ public class FriendshipService {
 
     public Friendship getFriendshipById(int id) {
         return friendshipRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Friendship not found."));
+    }
+
+    public List<Friendship> getFriendshipsByUserId(int userId) {
+        return friendshipRepository.findByUser1Id(userId);
     }
 
     public Friendship updateFriendship(int id, Friendship updatedFriendship) {
