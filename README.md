@@ -1,6 +1,6 @@
 # Boolean final project: Dog sitting platform (backend)
-This repository holds a RESTful API for a dog sitting platform application.
-It consists of a Java API which utilises Spring Boot, JPA, Hibernate and PostgreSQL. 
+This repository holds a RESTful API for a dog sitting platform application & the src/ui directory holds a front-end.
+The Java API utilises Spring Boot, JPA, Hibernate and PostgreSQL. The front-end is built with React. 
 
 #### !  As of this moment, the project is still in progress...
 
