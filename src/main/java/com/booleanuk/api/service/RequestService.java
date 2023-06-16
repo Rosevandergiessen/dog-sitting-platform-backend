@@ -1,6 +1,5 @@
 package com.booleanuk.api.service;
 
-import com.booleanuk.api.model.Dog;
 import com.booleanuk.api.model.Request;
 import com.booleanuk.api.repository.RequestRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,5 +45,4 @@ public class RequestService {
         requestRepository.delete(existingRequest);
         return existingRequest;
     }
-
 }

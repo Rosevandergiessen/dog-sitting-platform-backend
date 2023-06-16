@@ -1,6 +1,5 @@
 package com.booleanuk.api.service;
 
-import com.booleanuk.api.model.Dog;
 import com.booleanuk.api.model.User;
 import com.booleanuk.api.model.Friendship;
 import com.booleanuk.api.repository.FriendshipRepository;
@@ -17,7 +16,6 @@ public class FriendshipService {
 
     @Autowired
     private FriendshipRepository friendshipRepository;
-
 
     public Friendship createFriendship(User user1, User user2) {
         Friendship friendship = new Friendship(user1, user2);

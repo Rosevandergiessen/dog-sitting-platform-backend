@@ -1,6 +1,5 @@
 package com.booleanuk.api.DTO;
 
-
 public class FriendshipDTO {
     private int userId1;
     private int userId2;

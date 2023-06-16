@@ -1,7 +1,6 @@
 package com.booleanuk.api.service;
 
 import com.booleanuk.api.model.Dog;
-import com.booleanuk.api.model.User;
 import com.booleanuk.api.repository.DogRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -12,14 +11,10 @@ import org.springframework.web.server.ResponseStatusException;
 import java.io.IOException;
 import java.util.List;
 
-
 @Service
 public class DogService {
     @Autowired
     private DogRepository dogRepository;
-
-    @Autowired
-    private UserService userService;
 
     public List<Dog> getAllDogs() {
         return dogRepository.findAll();
@@ -33,17 +28,9 @@ public class DogService {
         return dogRepository.findById(id).orElse(null);
     }
 
-
     public Dog createDog(Dog dog) {
         return dogRepository.save(dog);
     }
-
-//    public Dog createDogByOwnerId(Dog dog) {
-//        // Get the currently authenticated user or the user specified in the request
-//        User owner = getCurrentUser(); // Implement this method based on your authentication mechanism
-//        dog.setOwner(owner);
-//        return dogRepository.save(dog);
-//    }
 
     public Dog updateDog(int id, Dog updatedDog) {
         Dog existingDog = dogRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Dog not found."));
@@ -67,7 +54,6 @@ public class DogService {
         if (image != null && !image.isEmpty()) {
             dog.setImage(image.getBytes());
         }
-
         return dogRepository.save(dog);
     }
 }

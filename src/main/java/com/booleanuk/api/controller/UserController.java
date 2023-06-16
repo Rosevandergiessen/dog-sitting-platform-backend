@@ -23,7 +23,6 @@ public class UserController {
     @Autowired
     private FriendshipService friendshipService;
 
-
     @GetMapping
     public ResponseEntity<List<User>> getAllUsers() {
         return ResponseEntity.ok(userService.getAllUsers());

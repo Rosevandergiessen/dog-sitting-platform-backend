@@ -26,7 +26,6 @@ public class Friendship {
         this.user2 = user2;
     }
 
-
     public int getId() {
         return id;
     }
@@ -51,4 +50,3 @@ public class Friendship {
         this.user2 = user2;
     }
 }
-
