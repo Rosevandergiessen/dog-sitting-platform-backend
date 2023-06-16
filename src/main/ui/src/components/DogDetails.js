@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import {Link, useParams} from "react-router-dom";
+import DogDelete from "./DogDelete";
+import DogUpdate from "./DogUpdate";
 
 const DogDetails = () => {
     const [dog, setDog] = useState(false);
@@ -47,6 +49,9 @@ const DogDetails = () => {
             <p>Breed: {dog.breed}</p>
             <p>Age: {dog.age}</p>
             <p>Description: {dog.description}</p>
+
+            <DogDelete id={id} />
+            <DogUpdate id={id} />
 
             <h2>Active Request(s)</h2>
             <ul>

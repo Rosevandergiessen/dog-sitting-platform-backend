@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import {Link} from "react-router-dom";
+import  '../styles/DogCard.css';
 
 const DogList = () => {
     const [dogs, setDogs] = useState([]);
@@ -24,16 +25,16 @@ const DogList = () => {
     }
 
     return (
-        <>
-            <h1>Dogs</h1>
-            <ul>
-                {dogs.map((dog) => (
-                    <li key={dog.id}>
-                        <Link to={`/dogs/${dog.id}`}>{dog.name}</Link>
-                    </li>
-                ))}
-            </ul>
-        </>
+        <div className="dog-grid">
+            {dogs.map((dog) => (
+                <Link to={`/dogs/${dog.id}`} className="dog-card-link" key={dog.id}>
+                    <div className="dog-card">
+                        <h3 className="dog-card-name">{dog.name}</h3>
+                        <p className="dog-card-description">{dog.description}</p>
+                    </div>
+                </Link>
+            ))}
+        </div>
     );
 };
 

@@ -1,0 +1,42 @@
+/* CSS for DogList component */
+
+.dog-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 20px;
+}
+
+.dog-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    transition: transform 0.3s ease;
+}
+
+.dog-card:hover {
+    transform: scale(1.05);
+}
+
+.dog-card-link {
+    text-decoration: none;
+    color: #000;
+}
+
+.dog-card-link:hover {
+    text-decoration: none;
+}
+
+.dog-card-name {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.dog-card-description {
+    margin-bottom: 10px;
+}

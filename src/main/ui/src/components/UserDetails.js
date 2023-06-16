@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react"
 import { useParams, Link } from "react-router-dom"
+import DogAdd from "./DogsAdd";
 
 function UsersDetails() {
     const [user, setUser] = useState(false)
@@ -43,7 +44,7 @@ function UsersDetails() {
             <h2>{user.username}</h2>
             <p>{user.email}</p>
             <h3>Dogs</h3>
-            <Link to={`/users/${id}/dogs/add`}>Add a dog</Link>
+            <DogAdd />
 
             {user.dogs.map((dog) => (
                 <li key={dog.id}>
