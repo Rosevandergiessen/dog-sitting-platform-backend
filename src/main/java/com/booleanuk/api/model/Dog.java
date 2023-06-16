@@ -29,6 +29,9 @@ public class Dog {
     @Column(name = "description")
     private String description;
 
+    @Column(name = "image", columnDefinition = "bytea")
+    private byte[] image;
+
     @OneToMany(mappedBy = "dog")
     private List<Request> requests;
 
@@ -101,5 +104,13 @@ public class Dog {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public byte[] getImage() {
+        return image;
+    }
+
+    public void setImage(byte[] image) {
+        this.image = image;
     }
 }

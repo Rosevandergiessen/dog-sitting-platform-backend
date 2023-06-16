@@ -6,8 +6,10 @@ import com.booleanuk.api.repository.DogRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.io.IOException;
 import java.util.List;
 
 
@@ -56,5 +58,16 @@ public class DogService {
        Dog existingDog = dogRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Dog not found."));
        dogRepository.delete(existingDog);
        return existingDog;
+    }
+
+    public Dog saveDogWithImage(String name, MultipartFile image) throws IOException {
+        Dog dog = new Dog();
+        dog.setName(name);
+
+        if (image != null && !image.isEmpty()) {
+            dog.setImage(image.getBytes());
+        }
+
+        return dogRepository.save(dog);
     }
 }
