@@ -25,6 +25,8 @@ const DogList = () => {
     }
 
     return (
+        <>
+        <h1>Dogs</h1>
         <div className="dog-grid">
             {dogs.map((dog) => (
                 <Link to={`/dogs/${dog.id}`} className="dog-card-link" key={dog.id}>
@@ -35,6 +37,7 @@ const DogList = () => {
                 </Link>
             ))}
         </div>
+        </>
     );
 };
 

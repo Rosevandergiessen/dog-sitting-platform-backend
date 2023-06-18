@@ -7,11 +7,6 @@ const Nav = () => {
         <nav>
             <ul className="nav-menu">
                 <li>
-                    <NavLink to="/" exact activeClassName="active">
-                        Home
-                    </NavLink>
-                </li>
-                <li>
                     <NavLink to="/dogs" activeClassName="active">
                         Dogs
                     </NavLink>

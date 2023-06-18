@@ -23,8 +23,6 @@ const UserList = () => {
         return <div>Loading...</div>;
     }
 
-
-
     return (
         <div>
             <div>
@@ -34,8 +32,8 @@ const UserList = () => {
                         <li key={request.id}>
                             <p>Dog: {request.dog.name}</p>
                             <p>Sitter: {request.sitter ? request.sitter.username : 'Accept this request?'}</p>
-                            <p>Start Time: {request.startDate}</p>
-                            <p>End Time: {request.endDate}</p>
+                            <p>Start Time: {request.startTime}</p>
+                            <p>End Time: {request.endTime}</p>
                         </li>
                     ))}
                 </ul>

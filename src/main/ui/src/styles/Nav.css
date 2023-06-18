@@ -27,14 +27,13 @@ nav {
 }
 
 .nav-menu a:hover {
-    background-color: #e0e0e0;
+    color: #4caf50;
 }
 
 .nav-menu .active {
-    background-color: #4caf50;
-    color: #fff;
+    color: deeppink;
 }
 
 .nav-menu .active:hover {
-    background-color: #45a049;
+    color: deeppink;
 }
