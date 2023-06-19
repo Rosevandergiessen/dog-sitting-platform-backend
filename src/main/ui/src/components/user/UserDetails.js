@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react"
 import { useParams, Link } from "react-router-dom"
-import DogAdd from "./DogsAdd";
+import DogAdd from "../dog/DogsAdd";
 
 function UsersDetails() {
     const [user, setUser] = useState(false)

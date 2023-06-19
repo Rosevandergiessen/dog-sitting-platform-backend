@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
-import  '../../src/styles/ModalForm.css';
+import  '../../styles/ModalForm.css';
 
 const DogAdd = () => {
     const { id } = useParams();

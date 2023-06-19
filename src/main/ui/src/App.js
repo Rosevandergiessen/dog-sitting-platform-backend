@@ -1,10 +1,10 @@
 import { Link, Route, Routes, useLocation } from "react-router-dom"
-import DogList from "./components/DogList";
-import UserList from "./components/UserList";
-import DogDetails from "./components/DogDetails";
-import UserDetails from "./components/UserDetails";
-import RequestList from "./components/RequestList";
-import DogsAdd from "./components/DogsAdd";
+import DogList from "./components/dog/DogList";
+import UserList from "./components/user/UserList";
+import DogDetails from "./components/dog/DogDetails";
+import UserDetails from "./components/user/UserDetails";
+import RequestList from "./components/request/RequestList";
+import DogsAdd from "./components/dog/DogsAdd";
 import Home from "./components/Home";
 import Nav from "./components/Nav";
 
