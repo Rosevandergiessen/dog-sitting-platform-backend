@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Lottie from 'react-lottie';
 import animationData from '../assets/dog-animation.json';
 import '../styles/Home.css';
+import {Link} from "react-router-dom";
 
 const Home = () => {
     useEffect(() => {
@@ -26,7 +27,7 @@ const Home = () => {
             />}
             <h1>Unleash the Paw Pact</h1>
             <p>Where Happy Dogs and Helpful Friends Collide</p>
-            <button className="cta-button">Get Started</button>
+            <Link to={'/login'} className="cta-button">Get Started! </Link>
         </div>
     );
 };

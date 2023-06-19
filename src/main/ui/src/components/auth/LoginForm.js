@@ -1,8 +1,16 @@
 import React, { useState } from 'react';
+import {Link, useNavigate} from "react-router-dom";
 
-const LoginForm = () => {
+export const LoginForm = () => {
+    const navigate = useNavigate();
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+
+    const handleInputChange = (e) => {
+        const { name, value } = e.target;
+        if (name === 'username') setUsername(value);
+        if (name === 'password') setPassword(value);
+    };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -16,34 +24,46 @@ const LoginForm = () => {
                 body: JSON.stringify({ username, password }),
             });
 
-            // Handle the response based on success or failure
             if (response.ok) {
-                // User logged in successfully
+                navigate('/welcome');
+                console.log('Login successful');
             } else {
-                // Invalid credentials or other error
+                // Login failed, handle error
+                console.error('Login failed');
             }
         } catch (error) {
-            // Handle network or server errors
+            console.error('An error occurred:', error);
         }
     };
 
     return (
-        <form onSubmit={handleSubmit}>
-            <input
-                type="text"
-                placeholder="Username"
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
-            />
-            <input
-                type="password"
-                placeholder="Password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-            />
-            <button type="submit">Login</button>
-        </form>
+        <div>
+            <h2>Login</h2>
+            <form onSubmit={handleSubmit}>
+                <div>
+                    <label htmlFor="username">Username:</label>
+                    <input
+                        type="text"
+                        id="username"
+                        value={username}
+                        onChange={handleInputChange}
+                    />
+                </div>
+                <div>
+                    <label htmlFor="password">Password:</label>
+                    <input
+                        type="password"
+                        id="password"
+                        value={password}
+                        onChange={handleInputChange}
+                    />
+                </div>
+                <button type="submit">Login</button>
+            </form>
+            <p>
+                Don't have an account yet?{' '}
+                <Link to="/register">Create an account</Link>
+            </p>
+        </div>
     );
 };
-
-export default LoginForm;

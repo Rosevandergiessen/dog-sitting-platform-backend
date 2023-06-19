@@ -7,6 +7,9 @@ import RequestList from "./components/request/RequestList";
 import DogsAdd from "./components/dog/DogsAdd";
 import Home from "./components/Home";
 import Nav from "./components/Nav";
+import {LoginForm} from "./components/auth/LoginForm";
+import {Welcome} from "./components/Welcome";
+import {RegisterForm} from "./components/auth/RegisterForm";
 
 export default function App() {
     const location = useLocation();
@@ -23,6 +26,9 @@ export default function App() {
             <main>
                 <Routes>
                     <Route path="/" element={<Home />} />
+                    <Route path="/login" element={<LoginForm />} />
+                    <Route path="register" element={<RegisterForm />} />
+                    <Route path="/welcome" element={<Welcome/>} />
                     <Route path="/dogs" element={<DogList />} />
                     <Route path="/dogs/:id" element={<DogDetails />} />
                     <Route path="/users" element={<UserList />} />
