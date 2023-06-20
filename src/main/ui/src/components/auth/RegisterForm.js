@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
+import AuthService from "../../services/AuthService";
 
 export const RegisterForm = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [email, setEmail] = useState('');
-    const [error, setError] = useState('');
-    const [success, setSuccess] = useState(false);
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
@@ -17,37 +16,12 @@ export const RegisterForm = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        const registrationRequest = {
-            username,
-            password,
-            email,
-        };
-
-        fetch('http://localhost:8080/register', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(registrationRequest),
-        })
-            .then((response) => {
-                if (!response.ok) {
-                    throw new Error(response.statusText);
-                }
-                setError('');
-                setSuccess(true);
-            })
-            .catch((error) => {
-                setSuccess(false);
-                setError(error.message);
-            });
+        AuthService.register(username, email, password)
     };
 
     return (
         <div>
             <h2>Register</h2>
-            {error && <div>{error}</div>}
-            {success && <div>Registration successful</div>}
             <form onSubmit={handleSubmit}>
                 <div>
                     <label>Username:</label>

@@ -27,7 +27,7 @@ const Home = () => {
             />}
             <h1>Unleash the Paw Pact</h1>
             <p>Where Happy Dogs and Helpful Friends Collide</p>
-            <Link to={'/login'} className="cta-button">Get Started! </Link>
+            <Link to={'/get-started'} className="cta-button">Get Started! </Link>
         </div>
     );
 };

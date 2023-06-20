@@ -6,10 +6,11 @@ import UserDetails from "./components/user/UserDetails";
 import RequestList from "./components/request/RequestList";
 import DogsAdd from "./components/dog/DogsAdd";
 import Home from "./components/Home";
-import Nav from "./components/Nav";
+import {NavBar} from "./components/Nav";
 import {LoginForm} from "./components/auth/LoginForm";
 import {Welcome} from "./components/Welcome";
 import {RegisterForm} from "./components/auth/RegisterForm";
+import {GetStarted} from "./components/GetStarted";
 
 export default function App() {
     const location = useLocation();
@@ -20,12 +21,13 @@ export default function App() {
         <>
             {showNav && (
                 <header>
-                    <Nav />
+                    <NavBar />
                 </header>
             )}
             <main>
                 <Routes>
                     <Route path="/" element={<Home />} />
+                    <Route path="/get-started" element={<GetStarted/>} />
                     <Route path="/login" element={<LoginForm />} />
                     <Route path="register" element={<RegisterForm />} />
                     <Route path="/welcome" element={<Welcome/>} />

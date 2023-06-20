@@ -1,28 +1,36 @@
-import React from "react";
-import { Link, NavLink } from "react-router-dom";
-import "../styles/Nav.css";
+import React from 'react';
+import {Link, NavLink} from 'react-router-dom';
+import AuthService from '../services/AuthService';
+import '../styles/Nav.css';
 
-const Nav = () => {
+export const NavBar = () => {
+    const currentUser = AuthService.getCurrentUser();
+
+    const handleLogout = () => {
+        AuthService.logout();
+        // Perform any additional logout logic or redirection
+    };
+
     return (
         <nav>
-            <ul className="nav-menu">
-                <li>
-                    <NavLink to="/dogs" activeClassName="active">
-                        Dogs
-                    </NavLink>
-                </li>
-                <li>
-                    <NavLink to="/users" activeClassName="active">
-                        Users
-                    </NavLink>
-                </li>
-                <li>
-                    <NavLink to="/requests" activeClassName="active">
-                        Requests
-                    </NavLink>
-                </li>
-            </ul>
+            <div className="navbar-container">
+                <div className="navbar-left">
+                    <NavLink to="/">Home</NavLink>
+                    <NavLink to="/dogs">Dogs</NavLink>
+                    <NavLink to="/users">Users</NavLink>
+                    <NavLink to="/requests">Requests</NavLink>
+                </div>
+                <div className="navbar-right">
+                    {currentUser ? (
+                        <div className="user-info">
+                            <Link className="username" to="/">{currentUser.username}</Link>
+                            <Link onClick={handleLogout} to="/get-started">Logout</Link>
+                        </div>
+                    ) : (
+                        <Link to="/login">Login</Link>
+                    )}
+                </div>
+            </div>
         </nav>
     );
 };
-export default Nav;

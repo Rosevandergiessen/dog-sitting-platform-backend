@@ -7,7 +7,6 @@ export const Welcome = () => {
     return (
         <div>
             <h2>Welcome, {currentUser && currentUser.username}!</h2>
-            <p>Thank you for logging in.</p>
         </div>
     );
 };
