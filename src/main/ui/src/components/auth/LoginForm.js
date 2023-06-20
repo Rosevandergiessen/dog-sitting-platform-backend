@@ -5,6 +5,7 @@ export const LoginForm = () => {
     const navigate = useNavigate();
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+    const [error, setError] = useState('');
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
@@ -25,13 +26,17 @@ export const LoginForm = () => {
             });
 
             if (response.ok) {
+                // Store the token in local storage or state management library
+                // Example: localStorage.setItem('token', token);
                 navigate('/welcome');
                 console.log('Login successful');
             } else {
-                // Login failed, handle error
-                console.error('Login failed');
+                const errorData = await response.json();
+                setError(errorData.message);
+                console.error('Login failed:', errorData.message);
             }
         } catch (error) {
+            setError('An error occurred. Please try again later.');
             console.error('An error occurred:', error);
         }
     };
@@ -45,8 +50,10 @@ export const LoginForm = () => {
                     <input
                         type="text"
                         id="username"
+                        name="username"
                         value={username}
                         onChange={handleInputChange}
+                        required
                     />
                 </div>
                 <div>
@@ -54,15 +61,17 @@ export const LoginForm = () => {
                     <input
                         type="password"
                         id="password"
+                        name="password"
                         value={password}
                         onChange={handleInputChange}
+                        required
                     />
                 </div>
+                {error && <p>{error}</p>}
                 <button type="submit">Login</button>
             </form>
             <p>
-                Don't have an account yet?{' '}
-                <Link to="/register">Create an account</Link>
+                Don't have an account yet? <Link to="/register">Create an account</Link>
             </p>
         </div>
     );

@@ -1,10 +1,17 @@
 import React from 'react';
-import {useLocation} from "react-router-dom";
+import { Link } from 'react-router-dom';
+
+
+
 
 export const Welcome = () => {
-    const location = useLocation();
-    const searchParams = new URLSearchParams(location.search);
-    const username = searchParams.get('username');
 
-    return <h2>Welcome {username}!</h2>;
+    return (
+        <div>
+            <h2>Paw Pact</h2>
+            <h2>Hi User!</h2>
+        </div>)
+
 };
+
+

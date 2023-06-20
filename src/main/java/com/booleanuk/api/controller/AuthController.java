@@ -8,8 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -29,26 +31,24 @@ public class AuthController {
 
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody LoginRequest loginRequest) {
-        // Retrieve the user from the database based on the provided username
-        User user = userRepository.findByUsername(loginRequest.getUsername());
+        try {
+            // Create an authentication token with the provided username and password
+            Authentication authentication = authenticationManager.authenticate(
+                    new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword())
+            );
+            // Set the authenticated token in the SecurityContextHolder
+            SecurityContextHolder.getContext().setAuthentication(authentication);
+            // You can perform additional tasks if needed (e.g., generating a JWT token)
 
-        if (user == null) {
-            // User not found in the database
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid username or password");
+            // Authentication successful
+            return ResponseEntity.ok("Login successful");
+        } catch (UsernameNotFoundException e) {
+            // Unknown username
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("{\"error\": \"Unknown username\"}");
+        } catch (Exception e) {
+            // Incorrect password
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("{\"error\": \"Incorrect password\"}");
         }
-
-        // Compare the password from the login request to the user's password stored in the database
-        if (!passwordEncoder.matches(loginRequest.getPassword(), user.getPassword())) {
-            // Passwords don't match
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid username or password");
-        }
-
-        // Authentication successful
-        // You can generate and return a token, set session attributes, or perform any other authentication-related tasks here
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        String username = authentication.getName();
-
-        return ResponseEntity.ok(username);
     }
 
     @PostMapping("/register")
