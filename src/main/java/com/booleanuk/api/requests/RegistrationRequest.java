@@ -1,4 +1,4 @@
-package com.booleanuk.api.DTO;
+package com.booleanuk.api.requests;
 
 public record RegistrationRequest(String username, String email, String password) {
         public String getUsername() {

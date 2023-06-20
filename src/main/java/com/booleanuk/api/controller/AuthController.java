@@ -1,9 +1,12 @@
 package com.booleanuk.api.controller;
 
-import com.booleanuk.api.DTO.LoginRequest;
-import com.booleanuk.api.DTO.RegistrationRequest;
+import com.booleanuk.api.requests.LoginRequest;
+import com.booleanuk.api.requests.RegistrationRequest;
 import com.booleanuk.api.model.User;
 import com.booleanuk.api.repository.UserRepository;
+import com.booleanuk.api.responses.JwtResponse;
+import com.booleanuk.api.security.JwtUtils;
+import com.booleanuk.api.service.UserDetailsImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -29,26 +32,22 @@ public class AuthController {
     @Autowired
     public PasswordEncoder passwordEncoder;
 
+    @Autowired
+    public JwtUtils jwtUtils;
+
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody LoginRequest loginRequest) {
-        try {
-            // Create an authentication token with the provided username and password
-            Authentication authentication = authenticationManager.authenticate(
-                    new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword())
-            );
-            // Set the authenticated token in the SecurityContextHolder
-            SecurityContextHolder.getContext().setAuthentication(authentication);
-            // You can perform additional tasks if needed (e.g., generating a JWT token)
 
-            // Authentication successful
-            return ResponseEntity.ok("Login successful");
-        } catch (UsernameNotFoundException e) {
-            // Unknown username
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("{\"error\": \"Unknown username\"}");
-        } catch (Exception e) {
-            // Incorrect password
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("{\"error\": \"Incorrect password\"}");
-        }
+        Authentication authentication = authenticationManager
+                .authenticate(new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword()));
+
+        SecurityContextHolder.getContext().setAuthentication(authentication);
+        String jwt = jwtUtils.generateJwtToken(authentication);
+
+        UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
+
+        return ResponseEntity
+                .ok(new JwtResponse(jwt, userDetails.getId(), userDetails.getUsername(), userDetails.getEmail()));
     }
 
     @PostMapping("/register")
