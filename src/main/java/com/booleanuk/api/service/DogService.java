@@ -1,6 +1,8 @@
 package com.booleanuk.api.service;
 
+import com.booleanuk.api.DTO.DogDTO;
 import com.booleanuk.api.model.Dog;
+import com.booleanuk.api.model.User;
 import com.booleanuk.api.repository.DogRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -10,6 +12,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class DogService {
@@ -55,5 +58,22 @@ public class DogService {
             dog.setImage(image.getBytes());
         }
         return dogRepository.save(dog);
+    }
+
+    public DogDTO getDogDtoWithOwner(int dogId) {
+        Optional<Dog> optionalDog = dogRepository.findById(dogId);
+        if (optionalDog.isPresent()) {
+            Dog dog = optionalDog.get();
+            User user = dog.getUser();
+            DogDTO dogDto = new DogDTO();
+            dogDto.setId(dog.getId());
+            dogDto.setName(dog.getName());
+            dogDto.setBreed(dog.getBreed());
+            dogDto.setAge(dog.getAge());
+            dogDto.setDescription(dog.getDescription());
+            dogDto.setUser(user);
+            return dogDto;
+        }
+        return null;
     }
 }

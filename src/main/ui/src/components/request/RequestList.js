@@ -26,7 +26,7 @@ const UserList = () => {
     return (
         <div>
             <div>
-                <h1>Requests List</h1>
+                <h1>All Requests</h1>
                 <ul>
                     {requests.map((request) => (
                         <li key={request.id}>

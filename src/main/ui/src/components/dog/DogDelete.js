@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate} from 'react-router-dom';
 
 const DogDelete = () => {
     const { id } = useParams();
-    const {userId} = useParams();
     const [isConfirming, setIsConfirming] = useState(false);
+    const navigate = useNavigate();
 
     const handleDelete = async () => {
         try {
@@ -15,6 +15,7 @@ const DogDelete = () => {
             if (response.ok) {
                 // Handle successful deletion
                 console.log('Dog deleted successfully');
+                navigate(-1)
             } else {
                 // Handle error response
                 console.error('Error deleting dog:', response.status);

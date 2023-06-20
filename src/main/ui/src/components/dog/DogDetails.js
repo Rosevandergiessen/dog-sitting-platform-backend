@@ -2,11 +2,13 @@ import React, { useState, useEffect } from 'react';
 import {Link, useParams} from "react-router-dom";
 import DogDelete from "./DogDelete";
 import DogUpdate from "./DogUpdate";
+import AuthService from "../../services/AuthService";
 
 const DogDetails = () => {
     const [dog, setDog] = useState(false);
     const [requests, setRequests] = useState(false);
-    const { id } = useParams()
+    const { id } = useParams();
+    const currentUser = AuthService.getCurrentUser();
 
     useEffect(() => {
         fetchDog();
@@ -48,10 +50,14 @@ const DogDetails = () => {
             <h1>{dog.name}</h1>
             <p>Breed: {dog.breed}</p>
             <p>Age: {dog.age}</p>
+            <p>Human: {dog.user.username}</p>
             <p>Description: {dog.description}</p>
 
-            <DogDelete id={id} />
-            <DogUpdate id={id} />
+            {currentUser.id === dog.user.id ? (  <>
+                <DogDelete id={id} />
+                <DogUpdate id={id} />
+            </>) : null}
+
 
             <h2>Active Request(s)</h2>
             <ul>

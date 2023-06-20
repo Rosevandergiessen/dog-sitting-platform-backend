@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react"
 import { useParams, Link } from "react-router-dom"
 import DogAdd from "../dog/DogsAdd";
+import AuthService from "../../services/AuthService";
 
 function UsersDetails() {
     const [user, setUser] = useState(false)
     const [friends, setFriends] = useState([])
+    const currentUser = AuthService.getCurrentUser();
 
     const { id } = useParams()
 
@@ -39,13 +41,15 @@ function UsersDetails() {
         return <p>Loading...</p>
     }
 
+    console.log('typeof currentUser.id:', typeof currentUser.id);
+    console.log('typeof id:', typeof id);
+
     return (
         <>
             <h2>{user.username}</h2>
             <p>{user.email}</p>
             <h3>Dogs</h3>
-            <DogAdd />
-
+            {currentUser.id === Number(id) ? <DogAdd /> : null}
             {user.dogs.map((dog) => (
                 <li key={dog.id}>
                     <Link to={`/dogs/${dog.id}`}>{dog.name}</Link>

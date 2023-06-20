@@ -1,4 +1,4 @@
-import { Link, Route, Routes, useLocation } from "react-router-dom"
+import {Link, Navigate, Route, Routes, useLocation} from "react-router-dom"
 import DogList from "./components/dog/DogList";
 import UserList from "./components/user/UserList";
 import DogDetails from "./components/dog/DogDetails";
@@ -8,14 +8,15 @@ import DogsAdd from "./components/dog/DogsAdd";
 import Home from "./components/Home";
 import {NavBar} from "./components/Nav";
 import {LoginForm} from "./components/auth/LoginForm";
-import {Welcome} from "./components/Welcome";
 import {RegisterForm} from "./components/auth/RegisterForm";
 import {GetStarted} from "./components/GetStarted";
+import {Profile} from "./components/user/Profile";
+import AuthService from "./services/AuthService";
 
 export default function App() {
     const location = useLocation();
-
     const showNav = location.pathname !== '/';
+    const currentUser = AuthService.getCurrentUser();
 
     return (
         <>
@@ -26,11 +27,14 @@ export default function App() {
             )}
             <main>
                 <Routes>
-                    <Route path="/" element={<Home />} />
-                    <Route path="/get-started" element={<GetStarted/>} />
-                    <Route path="/login" element={<LoginForm />} />
+                    <Route path="" element={<Home />} />
+                    <Route path="/get-started"
+                           element={<GetStarted/>} />
+                    <Route path="/login"
+                           element={currentUser ? <Navigate to="/my-profile" /> : <LoginForm />}
+                    />
+                    <Route path="/my-profile" element={<Profile />} />
                     <Route path="register" element={<RegisterForm />} />
-                    <Route path="/welcome" element={<Welcome/>} />
                     <Route path="/dogs" element={<DogList />} />
                     <Route path="/dogs/:id" element={<DogDetails />} />
                     <Route path="/users" element={<UserList />} />

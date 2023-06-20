@@ -54,7 +54,7 @@ const DogAdd = () => {
 
     return (
         <>
-            <button onClick={openModal}>Add your dog</button>
+            <button onClick={openModal}>Add new dog</button>
             {isAdding && (
                 <div className="modal">
                     <div className="modal-content">

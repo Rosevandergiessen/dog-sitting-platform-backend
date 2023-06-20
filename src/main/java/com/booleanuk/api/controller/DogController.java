@@ -1,5 +1,6 @@
 package com.booleanuk.api.controller;
 
+import com.booleanuk.api.DTO.DogDTO;
 import com.booleanuk.api.model.Dog;
 import com.booleanuk.api.model.Request;
 import com.booleanuk.api.model.User;
@@ -31,8 +32,8 @@ public class DogController {
     }
 
     @GetMapping({"/{id}"})
-    public ResponseEntity<Dog> getDog(@PathVariable int id) {
-        return ResponseEntity.ok(dogService.getDogById(id));
+    public ResponseEntity<DogDTO> getDogDtoWithUser(@PathVariable int id) {
+        return ResponseEntity.ok(dogService.getDogDtoWithOwner(id));
     }
 
     @GetMapping({"/{id}/requests"})
