@@ -1,17 +1,16 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-
-
-
+import AuthService from '../services/AuthService';
 
 export const Welcome = () => {
+    const currentUser = AuthService.getCurrentUser();
 
     return (
         <div>
-            <h2>Paw Pact</h2>
-            <h2>Hi User!</h2>
-        </div>)
-
+            <h2>Welcome, {currentUser && currentUser.username}!</h2>
+            <p>Thank you for logging in.</p>
+        </div>
+    );
 };
+
 
 

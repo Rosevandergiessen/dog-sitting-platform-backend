@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
-import {Link, useNavigate} from "react-router-dom";
+import { Link, useNavigate } from 'react-router-dom';
 
 export const LoginForm = () => {
     const navigate = useNavigate();
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
+
+    const API_URL = 'http://localhost:8080/';
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
@@ -15,9 +17,8 @@ export const LoginForm = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-
         try {
-            const response = await fetch('http://localhost:8080/login', {
+            const response = await fetch(API_URL + 'login', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -26,18 +27,16 @@ export const LoginForm = () => {
             });
 
             if (response.ok) {
-                // Store the token in local storage or state management library
-                // Example: localStorage.setItem('token', token);
+                const data = await response.json();
+                if (data.accessToken) {
+                    localStorage.setItem('user', JSON.stringify(data));
+                }
                 navigate('/welcome');
-                console.log('Login successful');
             } else {
-                const errorData = await response.json();
-                setError(errorData.message);
-                console.error('Login failed:', errorData.message);
+                throw new Error('Login failed.');
             }
         } catch (error) {
-            setError('An error occurred. Please try again later.');
-            console.error('An error occurred:', error);
+            setError(error.message);
         }
     };
 
