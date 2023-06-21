@@ -90,9 +90,10 @@ const DogDetails = () => {
             <ul>
                 {pendingRequests.map((request) => (
                     <li key={request.id}>
-                        <p>Start Time: {request.startTime}</p>
-                        <p>End Time: {request.endTime}</p>
-                        <button onClick={() => handleAcceptRequest(request.id, currentUser.id)}>Accept Request</button>
+                        <p>Start Time: {formatTime(request.startTime)}</p>
+                        <p>End Time: {formatTime(request.endTime)}</p>
+                        {dog.user.name === currentUser.name ? null : (
+                        <button onClick={() => handleAcceptRequest(request.id, currentUser.id)}>Accept Request</button>)}
                     </li>
                 ))}
             </ul>
