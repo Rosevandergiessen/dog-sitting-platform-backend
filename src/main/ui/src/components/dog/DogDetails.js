@@ -5,6 +5,7 @@ import DogUpdate from "./DogUpdate";
 import AuthService from "../../services/AuthService";
 import moment from "moment/moment";
 import '../../styles/DogDetails.css'
+import acceptRequest from "../../services/RequestService";
 
 const DogDetails = () => {
     const [dog, setDog] = useState(false);
@@ -51,6 +52,14 @@ const DogDetails = () => {
         return moment(time).format('dddd MMMM Do YYYY h:mm a');
     }
 
+    const handleAcceptRequest = async (id, userId) => {
+        try {
+            await acceptRequest(id, userId);
+        } catch (error) {
+            console.error('Error accepting request:', error);
+        }
+    };
+
     return (
         <div>
             <h1>{dog.name}</h1>
@@ -72,6 +81,7 @@ const DogDetails = () => {
                         <p>Sitter: {request.sitter.username}</p>
                         <p>Start Time: {formatTime(request.startTime)}</p>
                         <p>End Time: {formatTime(request.endTime)}</p>
+                        <p>Accepted: ✅ </p>
                     </li>
                 ))}
             </ul>
@@ -81,7 +91,7 @@ const DogDetails = () => {
                     <li key={request.id}>
                         <p>Start Time: {request.startTime}</p>
                         <p>End Time: {request.endTime}</p>
-                        <button>Accept request</button>
+                        <button onClick={() => handleAcceptRequest(request.id, currentUser.id)}>Accept Request</button>
                     </li>
                 ))}
             </ul>

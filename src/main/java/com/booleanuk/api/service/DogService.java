@@ -2,6 +2,7 @@ package com.booleanuk.api.service;
 
 import com.booleanuk.api.DTO.DogDTO;
 import com.booleanuk.api.model.Dog;
+import com.booleanuk.api.model.Request;
 import com.booleanuk.api.model.User;
 import com.booleanuk.api.repository.DogRepository;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -14,6 +14,9 @@ import {Profile} from "./components/user/Profile";
 import AuthService from "./services/AuthService";
 import './App.css';
 import {MyFriends} from "./components/user/MyFriends";
+import {MyRequests} from "./components/request/MyRequests";
+import {AcceptedRequests} from "./components/request/AcceptedRequests";
+import {MyDogs} from "./components/user/MyDogs";
 
 
 
@@ -51,6 +54,10 @@ export default function App() {
                     <Route path="/my-profile"
                            element={currentUser ? (<Profile />) : (<GetStarted />)} />
                     <Route path="/my-friends" element={<MyFriends />} />
+                    <Route path="/my-requests" element={<MyRequests />} />
+                    <Route path="/my-dogs" element={<MyDogs />} />
+                    <Route path="/logout" element={<Navigate to="/" />} />
+                    <Route path="/accepted-requests" element={<AcceptedRequests />} />
                     <Route path="register" element={<RegisterForm />} />
                     <Route path="/dogs" element={<DogList />} />
                     <Route path="/dogs/:id" element={<DogDetails />} />

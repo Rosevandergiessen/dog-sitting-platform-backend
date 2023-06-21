@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import  '../../styles/DogCard.css';
 import AuthService from '../../services/AuthService';
 import addFriend from "../../services/UserService";
@@ -9,6 +9,7 @@ const DogList = () => {
     const [dogs, setDogs] = useState([]);
     const currentUser = AuthService.getCurrentUser();
     const [friends, setFriends] = useState([]);
+    const navigate = useNavigate();
 
     useEffect(() => {
         fetchDogs();
@@ -42,6 +43,15 @@ const DogList = () => {
         }
     }
 
+    const handleAddFriend = async (friend) => {
+        try {
+            await addFriend(friend, currentUser);
+            window.location.reload()
+        } catch (error) {
+            console.error('Error adding friend:', error);
+        }
+    };
+
     if (!dogs) {
         return <div>Loading...</div>;
     }
@@ -50,45 +60,43 @@ const DogList = () => {
 
     return (
         <>
-        <h1>Dogs</h1>
-        <div className="dog-grid">
-            {dogs.map((dog) => (
-                <Link to={`/dogs/${dog.id}`} className="dog-card-link" key={dog.id}>
-                    <div className="dog-card">
-                        <h3 className="dog-card-name">{dog.name}</h3>
-                        <p className="dog-card-description">{dog.description}</p>
-                        {currentUser && currentUser.username === dog.user.username ? (
-                        <p className="own-dog">This is your dog!</p>) : (<p>This is {dog.user.username}'s Dog!</p>)}
+            <h1>Dogs</h1>
+            <div className="dog-grid">
+                {dogs.map((dog) => {
+                    const isFriendAdded = userFriends.some((friend) => friend.username === dog.user.username);
+                    const showLink = isFriendAdded && currentUser.username !== dog.user.username;
 
-                        {userFriends && userFriends.map((friend) => (
-                            <p className="dog-card-friend" key={friend.id}>
-                                {(() => {
-                                    if (friend.username === dog.user.username) {
-                                        return (
-                                            <>
-                                                <p>{dog.user.username} is your friend! </p>
-                                                <Link to={"/"}>See sitting requests for {dog.name}</Link>
-                                            </>
-                                        );
-                                    } else if (dog.user.username !== currentUser.username) {
-                                        return (
-                                            <>
-                                                <p>{dog.user.username} is not your friend</p>
-                                                <button onClick={() => addFriend(dog.user.id)}>Add {dog.user.username} as a Friend</button>
-                                            </>
-                                        );
-                                    } else {
-                                        return null;
-                                    }
-                                })()}
-                            </p>
-                        ))}
-                    </div>
-                </Link>
-            ))}
-        </div>
+                    return (
+                        <div className="dog-card" key={dog.id}>
+                            {/* Dog card content */}
+                            <Link
+                                to={showLink ? `/dogs/${dog.id}` : '#'}
+                                className={`dog-card-name dog-card-link ${showLink ? '' : 'disabled'}`}
+                            >
+                                {dog.name}
+                            </Link>
+                            <p className="dog-card-description">{dog.description}</p>
+                            {currentUser && currentUser.username === dog.user.username ? (
+                                <p className="own-dog">This is your dog!</p>
+                            ) : (
+                                <p>This is {dog.user.username}'s Dog!</p>
+                            )}
+                            {isFriendAdded ? (
+                                <>
+                                    <p>{dog.user.username} is your friend!</p>
+                                    {showLink && <Link to={`/dogs/${dog.id}`}>See sitting requests for {dog.name}</Link>}
+                                </>
+                            ) : dog.user.username !== currentUser.username ? (
+                                <>
+                                    <p>{dog.user.username} is not your friend</p>
+                                    <button onClick={() => handleAddFriend(dog.user.id)}>Add {dog.user.username} as a Friend</button>
+                                </>
+                            ) : null}
+                        </div>
+                    );
+                })}
+            </div>
         </>
     );
 };
-
 export default DogList;

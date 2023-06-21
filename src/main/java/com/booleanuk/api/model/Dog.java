@@ -113,4 +113,5 @@ public class Dog {
     public void setImage(byte[] image) {
         this.image = image;
     }
+
 }

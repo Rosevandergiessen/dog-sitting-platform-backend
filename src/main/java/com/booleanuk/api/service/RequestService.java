@@ -1,6 +1,7 @@
 package com.booleanuk.api.service;
 
 import com.booleanuk.api.model.Request;
+import com.booleanuk.api.model.User;
 import com.booleanuk.api.repository.RequestRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -37,6 +38,19 @@ public class RequestService {
         existingRequest.setStartTime(updatedRequest.getStartTime());
         existingRequest.setEndTime(updatedRequest.getEndTime());
         existingRequest.setAccepted(updatedRequest.isAccepted());
+        return requestRepository.save(existingRequest);
+    }
+
+    public Request acceptRequest(int id) {
+        Request existingRequest = requestRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Dog sitting request not found."));
+        existingRequest.setAccepted(true);
+        return requestRepository.save(existingRequest);
+    }
+
+    public Request updateRequestAcceptedAndSitter(int id, User user) {
+        Request existingRequest = requestRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Dog sitting request not found."));
+        existingRequest.setAccepted(true);
+        existingRequest.setSitter(user);
         return requestRepository.save(existingRequest);
     }
 

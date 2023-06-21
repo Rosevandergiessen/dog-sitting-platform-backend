@@ -1,6 +1,8 @@
 import React from "react";
+import { useNavigate} from "react-router-dom";
 
 const addFriend = async (friendId, currentUser) => {
+
     try {
         if (!currentUser || !currentUser.id) {
             console.error('Log in to add friends!');
@@ -21,6 +23,7 @@ const addFriend = async (friendId, currentUser) => {
         });
 
         if (response.ok) {
+
             console.log('Friend added successfully!');
         } else {
             console.error('Failed to add friend:', response.statusText);

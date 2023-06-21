@@ -1,7 +1,9 @@
 package com.booleanuk.api.controller;
 
 import com.booleanuk.api.model.Request;
+import com.booleanuk.api.model.User;
 import com.booleanuk.api.service.RequestService;
+import com.booleanuk.api.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -14,28 +16,32 @@ public class RequestController {
     @Autowired
     private RequestService requestService;
 
+    @Autowired
+    private UserService userService;
+
     @GetMapping
     public ResponseEntity<List<Request>> getAllRequests() {
         return ResponseEntity.ok(requestService.getAllRequests());
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Request> getRequestById(int id) {
+    public ResponseEntity<Request> getRequestById(@PathVariable int id) {
         return ResponseEntity.ok(requestService.getRequestById(id));
     }
 
     @PostMapping
-    public ResponseEntity<Request> createRequest(Request request) {
+    public ResponseEntity<Request> createRequest(@RequestBody Request request) {
         return ResponseEntity.ok(requestService.createRequest(request));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Request> updateRequest(int id, Request updatedRequest) {
-        return ResponseEntity.ok(requestService.updateRequest(id, updatedRequest));
+    public ResponseEntity<Request> acceptRequest(@PathVariable("id") int id, @RequestBody Integer sitterId) {
+        User sitter = userService.getUserById(sitterId);
+        return ResponseEntity.ok(requestService.updateRequestAcceptedAndSitter(id, sitter));
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Request> deleteRequest(int id) {
+    public ResponseEntity<Request> deleteRequest(@PathVariable int id) {
         return ResponseEntity.ok(requestService.deleteRequest(id));
     }
 }
