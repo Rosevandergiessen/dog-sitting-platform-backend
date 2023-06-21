@@ -2,6 +2,7 @@ import AuthService from "../../services/AuthService";
 import {useEffect, useState} from "react";
 import {Link} from "react-router-dom";
 import DogAdd from "../dog/DogsAdd";
+import RequestAdd from "../request/RequestAdd";
 
 export const MyDogs = () => {
     const currentUser = AuthService.getCurrentUser();
@@ -28,12 +29,13 @@ export const MyDogs = () => {
             <h2>My dogs</h2>
             <div className="dog-grid">
                 {dogs.map((dog) => (
-                    <Link to={`/dogs/${dog.id}`} className="dog-card-link" key={dog.id}>
                         <div className="dog-card">
-                            <h3 className="dog-card-name">{dog.name}</h3>
+                            <Link to={`/dogs/${dog.id}`} className="dog-card-link dog-card-name" key={dog.id}>{dog.name}</Link>
+                            <p className="dog-card-breed">{dog.breed}</p>
+                            <p className="dog-card-age">{dog.age} years old</p>
                             <p className="dog-card-description">{dog.description}</p>
+                            <RequestAdd dogId={dog.id}/>
                         </div>
-                    </Link>
                 ))}
             </div>
             <DogAdd id={currentUser.id}/>

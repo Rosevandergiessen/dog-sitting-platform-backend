@@ -1,5 +1,6 @@
 package com.booleanuk.api.model;
 
+import com.booleanuk.api.DTO.DogDTO;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;

@@ -1,5 +1,6 @@
 package com.booleanuk.api.service;
 
+import com.booleanuk.api.model.Dog;
 import com.booleanuk.api.model.Request;
 import com.booleanuk.api.model.User;
 import com.booleanuk.api.repository.RequestRepository;
@@ -8,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -25,6 +27,11 @@ public class RequestService {
 
     public List<Request> getRequestByDogId(int dogId) {
         return requestRepository.findByDogId(dogId);
+    }
+
+    public Request createDogRequest(Dog dog, LocalDateTime start, LocalDateTime end) {
+        Request request = new Request(dog, start, end);
+        return requestRepository.save(request);
     }
 
     public Request createRequest(Request request) {

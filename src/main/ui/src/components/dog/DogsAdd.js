@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import  '../../styles/ModalForm.css';
 
 const DogAdd = ({id}) => {
-
     const [name, setName] = useState('');
     const [breed, setBreed] = useState('');
     const [age, setAge] = useState('');

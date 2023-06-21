@@ -23,9 +23,20 @@ export const MyRequests = () => {
         }
     }
 
+    const fetchDogs = async () => {
+        try {
+            const response = await fetch(`http://localhost:8080/${currentUser.id}/dogs`);
+            const data = await response.json();
+            setDogs(data);
+            console.log(data);
+        } catch (error) {
+            console.error('Error fetching dogs:', error);
+        }
+    }
+
     const requestArray = Object.values(requests)
     // const filteredRequests = requestArray.filter(request => request.dog.user.id === currentUser.id);
-    const activeRequests = requestArray.filter((request) => request.accepted);
+    const acceptedRequests = requestArray.filter((request) => request.accepted);
     const pendingRequests = requestArray.filter((request) => !request.accepted);
 
     const formatTime = (time) => {
@@ -34,26 +45,28 @@ export const MyRequests = () => {
 
     return(
         <div>
-            <h1>My Requests</h1>
-            <h2>Active Request(s)</h2>
+            <h1>Accepted Requests</h1>
             <ul>
-                {activeRequests.map((request) => (
-                    <li key={request.id}>
-                        <p>Sitter: {request.sitter.username}</p>
-                        <p>Start Time: {formatTime(request.startTime)}</p>
-                        <p>End Time: {formatTime(request.endTime)}</p>
-                    </li>
-                ))}
-            </ul>
-            <h2>Pending Request(s)</h2>
-            <ul>
-                {pendingRequests.map((request) => (
-                    <li key={request.id}>
-                        <p>Start Time: {request.startTime}</p>
-                        <p>End Time: {request.endTime}</p>
-                        <button>Accept request</button>
-                    </li>
-                ))}
+                {acceptedRequests.length > 0 ? (acceptedRequests.map((request) => (
+                    <div key={request.id}>
+                        {request.sitter && request.dog.id === currentUser ? (
+                                <div>
+                                    <p>Dog: {request.dog.name}</p>
+                                    <p>Start Time: {formatTime(request.startTime)}</p>
+                                    <p>End Time: {formatTime(request.endTime)}</p>
+                                    <p>Duration: {
+                                        moment.duration(moment(request.endTime)
+                                            .diff(moment(request.startTime)))
+                                            .asHours() >= 24 ? moment.duration(moment(request.endTime)
+                                            .diff(moment(request.startTime)))
+                                            .asDays() + ' days' : moment.duration(moment(request.endTime)
+                                            .diff(moment(request.startTime)))
+                                            .asHours() + ' hours'
+                                    }</p>
+                                </div>)
+                            : null}
+                    </div>
+                ))) : (<h2>You don't have accepted any requests yet</h2>)}
             </ul>
         </div>)
 }

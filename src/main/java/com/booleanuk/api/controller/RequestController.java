@@ -1,13 +1,17 @@
 package com.booleanuk.api.controller;
 
+import com.booleanuk.api.DTO.RequestDTO;
+import com.booleanuk.api.model.Dog;
 import com.booleanuk.api.model.Request;
 import com.booleanuk.api.model.User;
+import com.booleanuk.api.service.DogService;
 import com.booleanuk.api.service.RequestService;
 import com.booleanuk.api.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
@@ -18,6 +22,9 @@ public class RequestController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private DogService dogService;
 
     @GetMapping
     public ResponseEntity<List<Request>> getAllRequests() {
@@ -32,6 +39,18 @@ public class RequestController {
     @PostMapping
     public ResponseEntity<Request> createRequest(@RequestBody Request request) {
         return ResponseEntity.ok(requestService.createRequest(request));
+    }
+
+    @PostMapping("/{dogId}")
+    public ResponseEntity<Request> createRequest(@PathVariable int dogId, @RequestBody RequestDTO requestDTO) {
+        Dog dog = dogService.getDogById(dogId);
+
+        LocalDateTime start = requestDTO.getStartTime();
+        LocalDateTime end = requestDTO.getEndTime();
+
+        Request request = requestService.createDogRequest(dog, start, end);
+
+        return ResponseEntity.ok(request);
     }
 
     @PutMapping("/{id}")

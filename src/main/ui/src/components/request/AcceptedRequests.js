@@ -25,6 +25,7 @@ export const AcceptedRequests = () => {
     const requestArray = Object.values(requests)
     const acceptedRequests = requestArray.filter((request) => request.accepted);
 
+
     const formatTime = (time) => {
         return moment(time).format('dddd MMMM Do YYYY h:mm a');
     }
