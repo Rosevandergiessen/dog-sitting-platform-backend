@@ -63,7 +63,6 @@ const DogList = () => {
 
                     return (
                         <div className="dog-card" key={dog.id}>
-                            {/* Dog card content */}
                             <Link
                                 to={showLink ? `/dogs/${dog.id}` : '#'}
                                 className={`dog-card-name dog-card-link ${showLink ? '' : 'disabled'}`}
@@ -87,8 +86,6 @@ const DogList = () => {
                                     <button onClick={() => handleAddFriend(dog.user.id)}>Add {dog.user.username} as a Friend</button>
                                 </>
                             ) : null}
-
-
                         </div>
                     );
                 })}

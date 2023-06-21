@@ -25,8 +25,8 @@ export const MyDogs = () => {
 
     return (
         <div>
-            <h1>{currentUser.username}</h1>
-            <h2>My dogs</h2>
+            <h1>My dogs</h1><span><DogAdd id={currentUser.id} className="dog-add"/></span>
+
             <div className="dog-grid">
                 {dogs.map((dog) => (
                         <div className="dog-card">
@@ -38,6 +38,6 @@ export const MyDogs = () => {
                         </div>
                 ))}
             </div>
-            <DogAdd id={currentUser.id}/>
+
         </div>
     )}
