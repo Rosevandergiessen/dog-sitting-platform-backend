@@ -55,6 +55,7 @@ const DogDetails = () => {
     const handleAcceptRequest = async (id, userId) => {
         try {
             await acceptRequest(id, userId);
+            window.location.reload();
         } catch (error) {
             console.error('Error accepting request:', error);
         }

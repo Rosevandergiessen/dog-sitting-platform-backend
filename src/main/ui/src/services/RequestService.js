@@ -11,7 +11,6 @@ const acceptRequest = async (requestId, sitterId) => {
     })
         .then((response) => response.json())
         .then((updatedRequest) => {
-            // Handle the updated request data
             console.log(updatedRequest);
         })
         .catch((error) => {

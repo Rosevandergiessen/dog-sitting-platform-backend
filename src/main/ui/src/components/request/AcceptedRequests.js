@@ -24,7 +24,6 @@ export const AcceptedRequests = () => {
 
     const requestArray = Object.values(requests)
     const acceptedRequests = requestArray.filter((request) => request.accepted);
-    const filteredRequests = acceptedRequests.filter(request => request.sitter.id === currentUser.id);
 
     const formatTime = (time) => {
         return moment(time).format('dddd MMMM Do YYYY h:mm a');
@@ -34,12 +33,25 @@ export const AcceptedRequests = () => {
         <div>
             <h1>Accepted Requests</h1>
             <ul>
-                {filteredRequests.length > 0 ? (filteredRequests.map((request) => (
-                    <li key={request.id}>
-                        <p>Sitter: {request.sitter.username}</p>
-                        <p>Start Time: {formatTime(request.startTime)}</p>
-                        <p>End Time: {formatTime(request.endTime)}</p>
-                    </li>
+                {acceptedRequests.length > 0 ? (acceptedRequests.map((request) => (
+                            <div key={request.id}>
+                            {request.sitter && request.sitter.username === currentUser.username ? (
+                            <div>
+                            <p>Dog: {request.dog.name}</p>
+                            <p>Start Time: {formatTime(request.startTime)}</p>
+                            <p>End Time: {formatTime(request.endTime)}</p>
+                            <p>Duration: {
+                                moment.duration(moment(request.endTime)
+                                    .diff(moment(request.startTime)))
+                                    .asHours() >= 24 ? moment.duration(moment(request.endTime)
+                                    .diff(moment(request.startTime)))
+                                    .asDays() + ' days' : moment.duration(moment(request.endTime)
+                                    .diff(moment(request.startTime)))
+                                    .asHours() + ' hours'
+                            }</p>
+                            </div>)
+                                : null}
+                            </div>
                 ))) : (<h2>You don't have accepted any requests yet</h2>)}
             </ul>
         </div>)

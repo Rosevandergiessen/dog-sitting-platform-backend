@@ -14,11 +14,6 @@ const DogList = () => {
     useEffect(() => {
         fetchDogs();
         fetchFriends();
-        // const fetchFriendsData = async () => {
-        //     const friendsData = await fetchFriends(currentUser.id);
-        //    setFriends(friendsData);
-        // };
-        // fetchFriendsData();
     }, []);
 
     const fetchDogs = async () => {
@@ -92,6 +87,8 @@ const DogList = () => {
                                     <button onClick={() => handleAddFriend(dog.user.id)}>Add {dog.user.username} as a Friend</button>
                                 </>
                             ) : null}
+
+
                         </div>
                     );
                 })}
