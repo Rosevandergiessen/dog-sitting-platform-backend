@@ -22,6 +22,8 @@ public class FriendshipController {
 
     @GetMapping
     public ResponseEntity<List<Friendship>> getAllFriendships() {
+        List<Friendship> friendships = friendshipService.getAllFriendships();
+
         return ResponseEntity.ok(friendshipService.getAllFriendships());
     }
 

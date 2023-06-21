@@ -3,6 +3,7 @@ import { RegisterForm } from './auth/RegisterForm';
 import { LoginForm } from './auth/LoginForm';
 import '../styles/GetStarted.css';
 import AuthService from '../services/AuthService';
+import {Welcome} from "./Welcome";
 
 export const GetStarted = () => {
     const currentUser = AuthService.getCurrentUser();
@@ -12,10 +13,7 @@ export const GetStarted = () => {
     return (
         <div className="get-started-container">
             {currentUser ? (
-                <div>
-                    <h2>Welcome, {currentUser.username}!</h2>
-                    {/* Add additional components or content for logged-in users */}
-                </div> )  : (
+                <Welcome /> ) : (
                <>
                <div>
                     <RegisterForm />

@@ -1,9 +1,7 @@
 import React, { useState } from 'react';
-import { useParams } from 'react-router-dom';
 import  '../../styles/ModalForm.css';
 
-const DogAdd = () => {
-    const { id } = useParams();
+const DogAdd = ({id}) => {
 
     const [name, setName] = useState('');
     const [breed, setBreed] = useState('');

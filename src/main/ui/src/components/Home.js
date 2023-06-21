@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Lottie from 'react-lottie';
-import animationData from '../assets/dog-animation.json';
+import animationData from '../assets/paw.json';
 import '../styles/Home.css';
 import {Link} from "react-router-dom";
 
@@ -22,8 +22,9 @@ const Home = () => {
         <div className="home">
             {animationOptions && <Lottie
                 options={animationOptions}
-                width={400} // Set the desired width
-                height={300} // Set the desired height
+                height={200}
+                speed={0.4}
+                color={'#FFD700'}
             />}
             <h1>Unleash the Paw Pact</h1>
             <p>Where Happy Dogs and Helpful Friends Collide</p>

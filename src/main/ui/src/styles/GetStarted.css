@@ -2,6 +2,7 @@
     display: flex;
     justify-content: space-between;
     padding: 50px;
+    align-content: center;
 }
 
 .get-started-container > div {

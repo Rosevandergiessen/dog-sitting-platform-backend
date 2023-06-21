@@ -27,7 +27,7 @@ public class DogController {
     private RequestService requestService;
 
     @GetMapping
-    public ResponseEntity<List<Dog>> getDogs() {
+    public ResponseEntity<List<DogDTO>> getDogs() {
         return ResponseEntity.ok(dogService.getAllDogs());
     }
 

@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import {Link} from "react-router-dom";
+import '../../styles/UserList.css';
+import AuthService from "../../services/AuthService";
+import addFriend from "../../services/UserService";
 
 const UserList = () => {
     const [users, setUsers] = useState([]);
+    const currentUser = AuthService.getCurrentUser();
 
     useEffect(() => {
         fetchUsers();
@@ -24,15 +27,16 @@ const UserList = () => {
     }
 
     return (
-        <div>
-            <h1>Users</h1>
-            <ul>
-                {users.map((user) => (
-                    <li key={user.id}>
-                        <Link to={`/users/${user.id}`}>{user.username}</Link>
-                    </li>
-                ))}
-            </ul>
+        <div className="user-list">
+            <h2>User List</h2>
+            {users.map((user) => (
+                user.id !== currentUser.id && (
+                    <div key={user.id}>
+                        <p>{user.username}</p>
+                        <button onClick={() => addFriend(user.id)}>Add {user.username} as a Friend</button>
+                    </div>
+                )
+            ))}
         </div>
     );
 };

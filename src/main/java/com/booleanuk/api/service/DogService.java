@@ -13,14 +13,28 @@ import org.springframework.web.server.ResponseStatusException;
 import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class DogService {
     @Autowired
     private DogRepository dogRepository;
 
-    public List<Dog> getAllDogs() {
-        return dogRepository.findAll();
+
+    public List<DogDTO> getAllDogs() {
+        List<Dog> dogs = dogRepository.findAll();
+        return dogs.stream()
+                .map(dog -> {
+                    DogDTO dogDto = new DogDTO();
+                    dogDto.setId(dog.getId());
+                    dogDto.setName(dog.getName());
+                    dogDto.setBreed(dog.getBreed());
+                    dogDto.setAge(dog.getAge());
+                    dogDto.setUser(dog.getUser());
+                    dogDto.setDescription(dog.getDescription());
+                    return dogDto;
+                })
+                .collect(Collectors.toList());
     }
 
     public List<Dog> getDogsByOwnerId(int userId) {

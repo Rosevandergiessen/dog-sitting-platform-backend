@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, {useEffect, useState} from 'react';
 import {Link} from "react-router-dom";
+import moment from "moment";
 
 const UserList = () => {
     const [requests, setRequests] = useState([]);
@@ -23,6 +24,10 @@ const UserList = () => {
         return <div>Loading...</div>;
     }
 
+    const formatTime = (time) => {
+        return moment(time).format('dddd MMMM Do YYYY h:mm a');
+    }
+
     return (
         <div>
             <div>
@@ -31,9 +36,19 @@ const UserList = () => {
                     {requests.map((request) => (
                         <li key={request.id}>
                             <p>Dog: {request.dog.name}</p>
-                            <p>Sitter: {request.sitter ? request.sitter.username : 'Accept this request?'}</p>
-                            <p>Start Time: {request.startTime}</p>
-                            <p>End Time: {request.endTime}</p>
+                            {request.sitter ? <><span>Sitter: </span><Link to={`/users/${request.sitter.id}`}>{request.sitter.username}</Link></> : null}
+                            <p>Start Time: {formatTime(request.startTime)}</p>
+                            <p>End Time: {formatTime(request.endTime)}</p>
+                            <p>Duration: {
+                                moment.duration(moment(request.endTime)
+                                    .diff(moment(request.startTime)))
+                                    .asHours() >= 24 ? moment.duration(moment(request.endTime)
+                                    .diff(moment(request.startTime)))
+                                    .asDays() + ' days' : moment.duration(moment(request.endTime)
+                                    .diff(moment(request.startTime)))
+                                    .asHours() + ' hours'
+                            }</p>
+                            <p>{request.accepted ? <span>Accepted: ✅</span> : <button>Accept request</button>}</p>
                         </li>
                     ))}
                 </ul>

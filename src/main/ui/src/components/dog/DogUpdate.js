@@ -71,7 +71,6 @@ const DogUpdate = () => {
 
     return (
         <>
-            <h2>Edit Dog</h2>
             <button onClick={openModal}>Edit Dog</button>
             {isEditing && (
                 <div className="modal">

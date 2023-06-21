@@ -41,15 +41,12 @@ function UsersDetails() {
         return <p>Loading...</p>
     }
 
-    console.log('typeof currentUser.id:', typeof currentUser.id);
-    console.log('typeof id:', typeof id);
-
     return (
         <>
             <h2>{user.username}</h2>
             <p>{user.email}</p>
             <h3>Dogs</h3>
-            {currentUser.id === Number(id) ? <DogAdd /> : null}
+            {currentUser && currentUser.id === Number(id) ? <DogAdd /> : null}
             {user.dogs.map((dog) => (
                 <li key={dog.id}>
                     <Link to={`/dogs/${dog.id}`}>{dog.name}</Link>

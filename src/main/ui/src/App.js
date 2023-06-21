@@ -1,4 +1,4 @@
-import {Link, Navigate, Route, Routes, useLocation} from "react-router-dom"
+import {Link, Navigate, Route, Routes, useLocation, useNavigate} from "react-router-dom"
 import DogList from "./components/dog/DogList";
 import UserList from "./components/user/UserList";
 import DogDetails from "./components/dog/DogDetails";
@@ -12,11 +12,21 @@ import {RegisterForm} from "./components/auth/RegisterForm";
 import {GetStarted} from "./components/GetStarted";
 import {Profile} from "./components/user/Profile";
 import AuthService from "./services/AuthService";
+import './App.css';
+import {MyFriends} from "./components/user/MyFriends";
+
+
 
 export default function App() {
     const location = useLocation();
     const showNav = location.pathname !== '/';
+    const showBack = location.pathname !== '/';
     const currentUser = AuthService.getCurrentUser();
+    const navigate = useNavigate();
+
+    const handleGoBack = () => {
+        navigate(-1);
+    }
 
     return (
         <>
@@ -24,6 +34,11 @@ export default function App() {
                 <header>
                     <NavBar />
                 </header>
+            )}
+            {showBack && (
+                <div>
+                    <button className="backButton" onClick={handleGoBack}>⇦</button>
+                </div>
             )}
             <main>
                 <Routes>
@@ -33,14 +48,16 @@ export default function App() {
                     <Route path="/login"
                            element={currentUser ? <Navigate to="/my-profile" /> : <LoginForm />}
                     />
-                    <Route path="/my-profile" element={<Profile />} />
+                    <Route path="/my-profile"
+                           element={currentUser ? (<Profile />) : (<GetStarted />)} />
+                    <Route path="/my-friends" element={<MyFriends />} />
                     <Route path="register" element={<RegisterForm />} />
                     <Route path="/dogs" element={<DogList />} />
                     <Route path="/dogs/:id" element={<DogDetails />} />
-                    <Route path="/users" element={<UserList />} />
                     <Route path="/users/:id" element={<UserDetails />} />
                     <Route path="/requests" element={<RequestList />} />
                     <Route path="/users/:id/dogs/add" element={<DogsAdd />} />
+                    <Route path="/add-a-friend" element={<UserList />} />
                 </Routes>
             </main>
         </>

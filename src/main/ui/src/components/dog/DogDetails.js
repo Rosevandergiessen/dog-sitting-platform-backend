@@ -3,6 +3,8 @@ import {Link, useParams} from "react-router-dom";
 import DogDelete from "./DogDelete";
 import DogUpdate from "./DogUpdate";
 import AuthService from "../../services/AuthService";
+import moment from "moment/moment";
+import '../../styles/DogDetails.css'
 
 const DogDetails = () => {
     const [dog, setDog] = useState(false);
@@ -45,28 +47,31 @@ const DogDetails = () => {
     const activeRequests = requestArray.filter((request) => request.accepted);
     const pendingRequests = requestArray.filter((request) => !request.accepted);
 
+    const formatTime = (time) => {
+        return moment(time).format('dddd MMMM Do YYYY h:mm a');
+    }
+
     return (
         <div>
             <h1>{dog.name}</h1>
             <p>Breed: {dog.breed}</p>
             <p>Age: {dog.age}</p>
-            <p>Human: {dog.user.username}</p>
             <p>Description: {dog.description}</p>
 
-            {currentUser.id === dog.user.id ? (  <>
+            {currentUser && currentUser.id === dog.user.id ? (  <>
+                <p className="own-dog">This is your dog!</p>
                 <DogDelete id={id} />
                 <DogUpdate id={id} />
-            </>) : null}
+            </>) : <p>Human: {dog.user.username}</p>}
 
 
             <h2>Active Request(s)</h2>
             <ul>
                 {activeRequests.map((request) => (
                     <li key={request.id}>
-                        <p>Dog: {request.dog.name}</p>
-                        <p>Sitter: {request.sitter ? request.sitter.username : 'Accept this request?'}</p>
-                        <p>Start Time: {request.startTime}</p>
-                        <p>End Time: {request.endTime}</p>
+                        <p>Sitter: {request.sitter.username}</p>
+                        <p>Start Time: {formatTime(request.startTime)}</p>
+                        <p>End Time: {formatTime(request.endTime)}</p>
                     </li>
                 ))}
             </ul>
@@ -74,10 +79,9 @@ const DogDetails = () => {
             <ul>
                 {pendingRequests.map((request) => (
                     <li key={request.id}>
-                        <p>Dog: {request.dog.name}</p>
-                        <p>Sitter: {request.sitter ? request.sitter.username : 'Accept this request?'}</p>
                         <p>Start Time: {request.startTime}</p>
                         <p>End Time: {request.endTime}</p>
+                        <button>Accept request</button>
                     </li>
                 ))}
             </ul>

@@ -58,4 +58,3 @@ public class DogDTO {
         this.user = user;
     }
 }
-
