@@ -35,7 +35,7 @@ export const MyFriends = () =>  {
                     <Link to={"/add-a-friend"}>ADD A FRIEND!</Link>
                 </h3>
             ) : (
-                <h1>FRIENDS</h1>
+                <h1>MY FRIENDS</h1>
             )}
             <div className="friends-container">
                 <ul className="friends-list">

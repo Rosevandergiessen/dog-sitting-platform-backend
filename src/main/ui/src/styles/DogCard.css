@@ -1,6 +1,3 @@
-/* CSS for DogList component */
-
-
 .dog-grid {
     padding: 70px 50px;
     display: grid;
@@ -61,4 +58,8 @@
 
 .add-dog-card {
     font-size: 50px;
+}
+
+.dog-card button:hover{
+    background-color: #f3ce4e;
 }

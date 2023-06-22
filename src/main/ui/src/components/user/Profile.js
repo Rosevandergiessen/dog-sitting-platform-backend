@@ -1,5 +1,4 @@
 import AuthService from "../../services/AuthService";
-import '../../styles/MyProfile.css'
 
 export const Profile = () => {
     const currentUser = AuthService.getCurrentUser();

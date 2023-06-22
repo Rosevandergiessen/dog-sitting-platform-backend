@@ -22,11 +22,23 @@ button {
   font-size: 15px;
   padding: 10px 20px;
   margin: 0 auto;
+  cursor: pointer;
 }
 
 h1  {
   text-align: center;
   font-size: 50px;
   margin: 0;
+}
+
+
+h2 {
+  font-size: 42px;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+h3 {
+  text-align: center;
 }
 
