@@ -11,6 +11,7 @@ export const MyRequests = () => {
 
     useEffect(() => {
         fetchRequests();
+        fetchDogs();
     }, []);
 
     const fetchRequests = async () => {
@@ -26,7 +27,7 @@ export const MyRequests = () => {
 
     const fetchDogs = async () => {
         try {
-            const response = await fetch(`http://localhost:8080/${currentUser.id}/dogs`);
+            const response = await fetch(`http://localhost:8080/dogs`);
             const data = await response.json();
             setDogs(data);
             console.log(data);
@@ -35,16 +36,14 @@ export const MyRequests = () => {
         }
     }
 
-    const requestArray = Object.values(requests)
-
     const formatTime = (time) => {
         return moment(time).format('dddd MMMM Do YYYY h:mm a');
     }
 
-    // Filter requests where dog.id matches myDogs array dog.id's
-    const filteredRequests = requestArray.filter((request) =>
-        dogs.some((dog) => dog.id === request.dog.id)
-    );
+    const filteredRequests = requests.filter((request) => {
+        const dog = dogs.find((dog) => dog.id === request.dog.id);
+        return dog && dog.user && dog.user.id === currentUser.id;
+    });
 
     return (
         <div className="request-container">
