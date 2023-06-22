@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import DogAdd from "../dog/DogsAdd";
 import AuthService from "../../services/AuthService";
+import '../../styles/UserDetails.css'
 
 function UsersDetails() {
     const [user, setUser] = useState(false);
@@ -45,23 +46,23 @@ function UsersDetails() {
 
     return (
         <div className="users-details-container">
-            <h2 className="users-details-username">{user.username}</h2>
-            <p className="users-details-email">{user.email}</p>
-            <h3 className="users-details-heading">Dogs</h3>
+            <h2 >{user.username.toUpperCase()}</h2>
+            <p >{user.email.toUpperCase()}</p>
+            <h3 >DOGS</h3>
             {currentUser && currentUser.id === Number(id) ? <DogAdd /> : null}
-            <ul className="users-details-dog-list">
+            <ul>
                 {user.dogs.map((dog) => (
                     <li key={dog.id}>
-                        <Link to={`/dogs/${dog.id}`}>{dog.name}</Link>
+                        <Link to={`/dogs/${dog.id}`}>{dog.name.toUpperCase()}</Link>
                     </li>
                 ))}
             </ul>
-            <h3 className="users-details-heading">Friends</h3>
-            <ul className="users-details-friends-list">
+            <h3 >Friends</h3>
+            <ul>
                 {friends.map((friend) => (
                     <li key={friend.id}>
                         <Link to={`/users/${friend.user2.id}`}>
-                            {friend.user2.username}
+                            {friend.user2.username.toUpperCase()}
                         </Link>
                     </li>
                 ))}

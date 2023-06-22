@@ -29,7 +29,7 @@ public class Dog {
     @Column(name = "description")
     private String description;
 
-    @OneToMany(mappedBy = "dog")
+    @OneToMany(mappedBy = "dog", cascade = CascadeType.ALL)
     private List<Request> requests;
 
     // Constructors
