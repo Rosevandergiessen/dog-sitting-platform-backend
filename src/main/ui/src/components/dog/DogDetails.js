@@ -5,6 +5,7 @@ import DogUpdate from "./DogUpdate";
 import AuthService from "../../services/AuthService";
 import moment from "moment/moment";
 import acceptRequest from "../../services/RequestService";
+import '../../styles/DogDetails.css';
 
 const DogDetails = () => {
     const [dog, setDog] = useState(false);
@@ -61,21 +62,28 @@ const DogDetails = () => {
     };
 
     return (
-        <div>
+        <div className="dog-details-container">
             <h1>{dog.name.toUpperCase()}</h1>
-            <p>Breed: {dog.breed}</p>
-            <p>Age: {dog.age}</p>
-            <p>Description: {dog.description}</p>
+            <span>breed</span>
+            <p> {dog.breed.toUpperCase()}</p>
+            <span>age</span>
+            <p> {dog.age} YEARS OLD</p>
+            <span>description</span>
+            <p> {dog.description.toUpperCase()}</p>
 
             {currentUser && currentUser.id === dog.user.id ? (  <>
-                <p className="own-dog">This is your dog!</p>
+                <p className="own-dog">THIS IS YOUR DOG</p>
                 <DogDelete id={id} />
                 <DogUpdate id={id} />
-            </>) : <p>Human: {dog.user.username}</p>}
+            </>) :
+                <>
+                <span>human</span>
+                <Link to={`/users/${dog.user.id}`}>{dog.user.username.toUpperCase()}</Link>
+                </>}
 
-
-            <h2>Active Request(s)</h2>
+            <h3 className="accepted-requests">ACCEPTED REQUEST(S)</h3>
             <ul>
+                {activeRequests.length === 0 && <p>No accepted requests</p>}
                 {activeRequests.map((request) => (
                     <li key={request.id}>
                         <p>Sitter: {request.sitter.username}</p>
@@ -86,13 +94,15 @@ const DogDetails = () => {
                     </li>
                 ))}
             </ul>
-            <h2>Pending Request(s)</h2>
+            <h3>PENDING REQUEST(S)</h3>
             <ul>
+                {pendingRequests.length === 0 && <p>No pending requests</p>}
                 {pendingRequests.map((request) => (
                     <li key={request.id}>
                         <p>Start Time: {formatTime(request.startTime)}</p>
                         <p>End Time: {formatTime(request.endTime)}</p>
-                        <button onClick={() => handleAcceptRequest(request.id, currentUser.id)}>Accept Request</button>
+                        {currentUser && currentUser.id === dog.user.id ? null : (<button onClick={() => handleAcceptRequest(request.id, currentUser.id)}>Accept Request</button>)}
+                        <p>--------------------------------------</p>
                     </li>
                 ))}
             </ul>

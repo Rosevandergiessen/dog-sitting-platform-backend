@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from "react";
 import AuthService from "../../services/AuthService";
 import moment from "moment";
+import '../../styles/Requests.css'
 
 export const MyRequests = () => {
     const [dogs, setDogs] = useState([]);
@@ -46,7 +47,7 @@ export const MyRequests = () => {
     );
 
     return (
-        <div>
+        <div className="request-container">
             <h1>My Requests</h1>
             <ul>
                 {filteredRequests.length > 0 ? (
@@ -68,7 +69,7 @@ export const MyRequests = () => {
                         </div>
                     ))
                 ) : (
-                    <h3>You don't have any accepted requests for your dogs yet.</h3>
+                    <h3>You don't have any pending requests.</h3>
                 )}
             </ul>
         </div>

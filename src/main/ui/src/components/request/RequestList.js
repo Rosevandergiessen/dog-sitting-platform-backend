@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {Link} from "react-router-dom";
 import moment from "moment";
+import '../../styles/Requests.css'
 
 const UserList = () => {
     const [requests, setRequests] = useState([]);
@@ -30,8 +31,8 @@ const UserList = () => {
 
     return (
         <div>
-            <div>
-                <h1>All Requests</h1>
+            <div className="request-container">
+                <h1>ALL REQUESTS</h1>
                 <ul>
                     {requests.map((request) => (
                         <li key={request.id}>
@@ -48,7 +49,8 @@ const UserList = () => {
                                     .diff(moment(request.startTime)))
                                     .asHours() + ' hours'
                             }</p>
-                            <p>{request.accepted ? <span>Accepted: ✅</span> : <button>Accept request</button>}</p>
+                            <p>{request.accepted ? <span>ACCEPTED ✅</span> : <button>ACCEPT REQUEST</button>}</p>
+                            <p>-----------------------------------------------</p>
                         </li>
                     ))}
                 </ul>

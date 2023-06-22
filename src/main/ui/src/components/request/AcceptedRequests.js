@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from "react";
 import AuthService from "../../services/AuthService";
 import moment from "moment";
+import '../../styles/Requests.css'
 
 export const AcceptedRequests = () => {
     const [requests, setRequests] = useState([]);
@@ -39,7 +40,7 @@ export const AcceptedRequests = () => {
     }
 
     return(
-        <div>
+        <div className="request-container">
             <h1>Accepted Requests</h1>
             <ul>
                 {acceptedRequests.length > 0 ? (acceptedRequests.map((request) => (
@@ -58,6 +59,7 @@ export const AcceptedRequests = () => {
                                     .diff(moment(request.startTime)))
                                     .asHours() + ' hours'
                             }</p>
+                                <p>-------------------------------------------------------</p>
                             </div>)
                                 : null}
                             </div>

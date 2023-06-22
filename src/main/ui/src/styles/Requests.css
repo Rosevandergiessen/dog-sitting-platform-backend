@@ -1,0 +1,14 @@
+.request-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.request-container ul {
+    list-style-type: none;
+}
+
+.request-container button:hover {
+    background-color: #7f49c9;
+}
