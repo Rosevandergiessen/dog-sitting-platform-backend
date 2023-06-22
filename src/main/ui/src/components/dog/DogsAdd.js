@@ -16,6 +16,7 @@ const DogAdd = ({id}) => {
             breed,
             age: parseInt(age),
             description,
+            image
         };
 
         try {

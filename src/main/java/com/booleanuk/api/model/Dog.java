@@ -29,6 +29,7 @@ public class Dog {
     @Column(name = "description")
     private String description;
 
+    @Lob
     @Column(name = "image", columnDefinition = "bytea")
     private byte[] image;
 
