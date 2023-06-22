@@ -4,7 +4,6 @@ import DogDelete from "./DogDelete";
 import DogUpdate from "./DogUpdate";
 import AuthService from "../../services/AuthService";
 import moment from "moment/moment";
-import '../../styles/DogDetails.css'
 import acceptRequest from "../../services/RequestService";
 
 const DogDetails = () => {
@@ -63,7 +62,7 @@ const DogDetails = () => {
 
     return (
         <div>
-            <h1>{dog.name}</h1>
+            <h1>{dog.name.toUpperCase()}</h1>
             <p>Breed: {dog.breed}</p>
             <p>Age: {dog.age}</p>
             <p>Description: {dog.description}</p>
@@ -92,8 +91,7 @@ const DogDetails = () => {
                     <li key={request.id}>
                         <p>Start Time: {formatTime(request.startTime)}</p>
                         <p>End Time: {formatTime(request.endTime)}</p>
-                        {dog.user.name === currentUser.name ? null : (
-                        <button onClick={() => handleAcceptRequest(request.id, currentUser.id)}>Accept Request</button>)}
+                        <button onClick={() => handleAcceptRequest(request.id, currentUser.id)}>Accept Request</button>
                     </li>
                 ))}
             </ul>

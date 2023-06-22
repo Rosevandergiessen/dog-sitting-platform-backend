@@ -35,38 +35,45 @@ export const MyRequests = () => {
     }
 
     const requestArray = Object.values(requests)
-    // const filteredRequests = requestArray.filter(request => request.dog.user.id === currentUser.id);
-    const acceptedRequests = requestArray.filter((request) => request.accepted);
-    const pendingRequests = requestArray.filter((request) => !request.accepted);
 
     const formatTime = (time) => {
         return moment(time).format('dddd MMMM Do YYYY h:mm a');
     }
 
-    return(
+    // Filter dogs by current user id
+    const myDogs = dogs.filter(dog => dog.user.id === currentUser.id);
+
+    // Filter requests where dog.id matches myDogs array dog.id's
+    const filteredRequests = requestArray.filter((request) =>
+        myDogs.some((dog) => dog.id === request.dog.id)
+    );
+
+    return (
         <div>
-            <h1>Accepted Requests</h1>
+            <h1>My Requests</h1>
             <ul>
-                {acceptedRequests.length > 0 ? (acceptedRequests.map((request) => (
-                    <div key={request.id}>
-                        {request.sitter && request.dog.id === currentUser ? (
-                                <div>
-                                    <p>Dog: {request.dog.name}</p>
-                                    <p>Start Time: {formatTime(request.startTime)}</p>
-                                    <p>End Time: {formatTime(request.endTime)}</p>
-                                    <p>Duration: {
-                                        moment.duration(moment(request.endTime)
-                                            .diff(moment(request.startTime)))
-                                            .asHours() >= 24 ? moment.duration(moment(request.endTime)
-                                            .diff(moment(request.startTime)))
-                                            .asDays() + ' days' : moment.duration(moment(request.endTime)
-                                            .diff(moment(request.startTime)))
-                                            .asHours() + ' hours'
-                                    }</p>
-                                </div>)
-                            : null}
-                    </div>
-                ))) : (<h2>You don't have accepted any requests yet</h2>)}
+                {filteredRequests.length > 0 ? (
+                    filteredRequests.map((request) => (
+                        <div key={request.id}>
+                            <div>
+                                <p>Dog: {request.dog.name}</p>
+                                <p>Start Time: {formatTime(request.startTime)}</p>
+                                <p>End Time: {formatTime(request.endTime)}</p>
+                                <p>
+                                    Duration:{" "}
+                                    {moment.duration(moment(request.endTime).diff(moment(request.startTime))).asHours() >= 24
+                                        ? moment.duration(moment(request.endTime).diff(moment(request.startTime))).asDays() +
+                                        " days"
+                                        : moment.duration(moment(request.endTime).diff(moment(request.startTime))).asHours() +
+                                        " hours"}
+                                </p>
+                            </div>
+                        </div>
+                    ))
+                ) : (
+                    <h3>You don't have any accepted requests for your dogs yet.</h3>
+                )}
             </ul>
-        </div>)
-}
+        </div>
+    );
+};

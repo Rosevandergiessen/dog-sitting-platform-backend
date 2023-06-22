@@ -55,11 +55,11 @@ const DogList = () => {
 
     return (
         <>
-            <h1>Dogs</h1>
+            <h1>DOGS</h1>
             <div className="dog-grid">
                 {dogs.map((dog) => {
                     const isFriendAdded = userFriends.some((friend) => friend.username === dog.user.username);
-                    const showLink = isFriendAdded && currentUser.username !== dog.user.username;
+                    const showLink = isFriendAdded || currentUser.username === dog.user.username;
 
                     return (
                         <div className="dog-card" key={dog.id}>
@@ -67,23 +67,23 @@ const DogList = () => {
                                 to={showLink ? `/dogs/${dog.id}` : '#'}
                                 className={`dog-card-name dog-card-link ${showLink ? '' : 'disabled'}`}
                             >
-                                {dog.name}
+                                {dog.name.toUpperCase()}
                             </Link>
-                            <p className="dog-card-description">{dog.description}</p>
+                            <p className="dog-card-content">{dog.description.toUpperCase()}</p>
+                            <p className="dog-card-content">{dog.breed.toUpperCase()}</p>
+                            <p className="dog-card-content">{dog.age} YEARS OLD</p>
                             {currentUser && currentUser.username === dog.user.username ? (
-                                <p className="own-dog">This is your dog!</p>
+                                <p className="own-dog">THIS IS YOUR DOG!</p>
                             ) : (
-                                <p>This is {dog.user.username}'s Dog!</p>
+                                <p>THIS IS {dog.user.username.toUpperCase()}'S DOG</p>
                             )}
                             {isFriendAdded ? (
                                 <>
-                                    <p>{dog.user.username} is your friend!</p>
-                                    {showLink && <Link to={`/dogs/${dog.id}`}>See sitting requests for {dog.name}</Link>}
+                                    {showLink && <Link to={`/dogs/${dog.id}`} className="requests-link">SEE SITTING REQUESTS FOR {dog.name.toUpperCase()}</Link>}
                                 </>
                             ) : dog.user.username !== currentUser.username ? (
                                 <>
-                                    <p>{dog.user.username} is not your friend</p>
-                                    <button onClick={() => handleAddFriend(dog.user.id)}>Add {dog.user.username} as a Friend</button>
+                                    <button onClick={() => handleAddFriend(dog.user.id)}>ADD AS A FRIEND </button>
                                 </>
                             ) : null}
                         </div>

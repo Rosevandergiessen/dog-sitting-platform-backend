@@ -9,17 +9,16 @@ export const GetStarted = () => {
     const currentUser = AuthService.getCurrentUser();
 
 
-
     return (
         <div className="get-started-container">
             {currentUser ? (
                 <Welcome /> ) : (
                <>
                <div>
-                    <RegisterForm />
+                    <RegisterForm classname="form-register"/>
                 </div>
                 <div>
-                    <LoginForm />
+                    <LoginForm classname="form-login"/>
                 </div>
                </>
             )}

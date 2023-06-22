@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import '../../styles/Form.css';
 
 export const LoginForm = () => {
     const navigate = useNavigate();
@@ -41,10 +42,10 @@ export const LoginForm = () => {
     };
 
     return (
-        <div>
+        <div className="login-form-container">
             <h2>Login</h2>
             <form onSubmit={handleSubmit}>
-                <div>
+                <div className="form-group">
                     <label htmlFor="username">Username:</label>
                     <input
                         type="text"
@@ -55,7 +56,7 @@ export const LoginForm = () => {
                         required
                     />
                 </div>
-                <div>
+                <div className="form-group">
                     <label htmlFor="password">Password:</label>
                     <input
                         type="password"

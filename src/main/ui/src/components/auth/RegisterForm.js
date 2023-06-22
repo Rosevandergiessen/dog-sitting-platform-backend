@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import AuthService from "../../services/AuthService";
+import '../../styles/Form.css'
 
 export const RegisterForm = () => {
     const [username, setUsername] = useState('');
@@ -20,10 +21,10 @@ export const RegisterForm = () => {
     };
 
     return (
-        <div>
+        <div className="register-form-container">
             <h2>Register</h2>
             <form onSubmit={handleSubmit}>
-                <div>
+                <div className="form-group">
                     <label>Username:</label>
                     <input
                         type="text"
@@ -32,7 +33,7 @@ export const RegisterForm = () => {
                         onChange={handleInputChange}
                     />
                 </div>
-                <div>
+                <div className="form-group">
                     <label>Password:</label>
                     <input
                         type="password"
@@ -41,7 +42,7 @@ export const RegisterForm = () => {
                         onChange={handleInputChange}
                     />
                 </div>
-                <div>
+                <div className="form-group">
                     <label>Email:</label>
                     <input
                         type="email"
@@ -50,7 +51,7 @@ export const RegisterForm = () => {
                         onChange={handleInputChange}
                     />
                 </div>
-                <div>
+                <div className="form-group">
                     <button type="submit">Register</button>
                 </div>
             </form>

@@ -30,6 +30,14 @@ export const AcceptedRequests = () => {
         return moment(time).format('dddd MMMM Do YYYY h:mm a');
     }
 
+    if (!requests) {
+        return <h3>Loading...</h3>;
+    }
+
+    if (requests.length === 0) {
+        return <h3>You have not accepted any requests yet</h3>;
+    }
+
     return(
         <div>
             <h1>Accepted Requests</h1>
