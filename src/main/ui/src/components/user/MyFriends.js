@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react"
 import AuthService from "../../services/AuthService";
-import {Link, useParams} from "react-router-dom";
+import '../../styles/MyFriends.css';
+import {Link} from "react-router-dom";
 
 export const MyFriends = () =>  {
     const [friends, setFriends] = useState([])
@@ -10,7 +11,6 @@ export const MyFriends = () =>  {
     useEffect(() => {
         fetchFriends();
     }, []);
-
 
    const fetchFriends = async () => {
         try {
@@ -27,16 +27,32 @@ export const MyFriends = () =>  {
         return <p>Loading...</p>
     }
 
-
     return (
         <>
-
-            {friends.length === 0 ? <h3>You don't have any friends yet, <Link to={"/add-a-friend"}> add a friend!</Link></h3> : <h3>Friends</h3>  }
-            {friends.map((friend) => (
-                <li key={friend.id}>
-                    <Link to={`/users/${friend.user2.id}`}>{friend.user2.username}</Link>
-                </li>
-            ))}
+            {friends.length === 0 ? (
+                <h3>
+                    You don't have any friends yet,{" "}
+                    <Link to={"/add-a-friend"}>add a friend!</Link>
+                </h3>
+            ) : (
+                <h1>Friends</h1>
+            )}
+            <div className="friends-container">
+                <ul className="friends-list">
+                    {friends.map((friend) => (
+                        <li key={friend.id}>
+                            <div className="friend-avatar">
+                                <img
+                                    src={`https://source.unsplash.com/100x100/?portrait?id=${friend.id}`}
+                                    alt="Friend Avatar"
+                                />
+                            </div>
+                            <Link to={`/users/${friend.user2.id}`}>{friend.user2.username}</Link>
+                        </li>
+                    ))}
+                </ul>
+            </div>
         </>
-    )
+    );
+
 }

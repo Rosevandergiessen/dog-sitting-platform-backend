@@ -48,7 +48,7 @@ const RequestAdd = ({dogId}) => {
 
     return (
         <>
-            <button onClick={openModal}>Add new Request</button>
+            <button onClick={openModal}>MAKE NEW REQUEST</button>
             {isAdding && (
                 <div className="modal">
                     <div className="modal-content">

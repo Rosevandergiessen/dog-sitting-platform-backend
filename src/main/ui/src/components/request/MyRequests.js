@@ -40,16 +40,13 @@ export const MyRequests = () => {
         return moment(time).format('dddd MMMM Do YYYY h:mm a');
     }
 
-    // Filter dogs by current user id
-    const myDogs = dogs.filter(dog => dog.user.id === currentUser.id);
-
     // Filter requests where dog.id matches myDogs array dog.id's
     const filteredRequests = requestArray.filter((request) =>
-        myDogs.some((dog) => dog.id === request.dog.id)
+        dogs.some((dog) => dog.id === request.dog.id)
     );
 
     return (
-        <div>
+        <div> 5
             <h1>My Requests</h1>
             <ul>
                 {filteredRequests.length > 0 ? (

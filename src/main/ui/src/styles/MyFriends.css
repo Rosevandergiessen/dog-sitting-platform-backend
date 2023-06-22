@@ -1,0 +1,45 @@
+.friends-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.friends-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+.friends-list li {
+    margin-bottom: 10px;
+}
+
+.friends-list li a {
+    text-decoration: none;
+    color: #333;
+}
+
+.friends-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+.friends-list li {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.friend-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-right: 10px;
+}
+
+.friend-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
