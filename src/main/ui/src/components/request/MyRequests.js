@@ -64,6 +64,8 @@ export const MyRequests = () => {
                                         : moment.duration(moment(request.endTime).diff(moment(request.startTime))).asHours() +
                                         " hours"}
                                 </p>
+                                {request.accepted ? ("Accepted: ✅") : ("Accepted: ❌")}
+                                <p>----------------------------------------------</p>
                             </div>
                         </div>
                     ))
