@@ -46,7 +46,7 @@ export const MyRequests = () => {
     );
 
     return (
-        <div> 5
+        <div>
             <h1>My Requests</h1>
             <ul>
                 {filteredRequests.length > 0 ? (

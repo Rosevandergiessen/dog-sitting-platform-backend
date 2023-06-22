@@ -26,7 +26,7 @@ export const MyDogs = () => {
 
     return (
         <div>
-            <h1>MY DOGS</h1><span><DogAdd id={currentUser.id} className="dog-add"/></span>
+            <h1>MY DOGS</h1>
 
             <div className="dog-grid">
                 {dogs.map((dog) => (

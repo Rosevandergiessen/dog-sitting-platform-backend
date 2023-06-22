@@ -14,9 +14,6 @@ export const GetStarted = () => {
             {currentUser ? (
                 <Welcome /> ) : (
                <>
-               <div>
-                    <RegisterForm classname="form-register"/>
-                </div>
                 <div>
                     <LoginForm classname="form-login"/>
                 </div>

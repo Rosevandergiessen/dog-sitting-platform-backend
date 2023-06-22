@@ -31,11 +31,11 @@ export const MyFriends = () =>  {
         <>
             {friends.length === 0 ? (
                 <h3>
-                    You don't have any friends yet,{" "}
-                    <Link to={"/add-a-friend"}>add a friend!</Link>
+                    YOU DON'T HAVE ANY FRIENDS YET,{" "}
+                    <Link to={"/add-a-friend"}>ADD A FRIEND!</Link>
                 </h3>
             ) : (
-                <h1>Friends</h1>
+                <h1>FRIENDS</h1>
             )}
             <div className="friends-container">
                 <ul className="friends-list">
@@ -47,7 +47,7 @@ export const MyFriends = () =>  {
                                     alt="Friend Avatar"
                                 />
                             </div>
-                            <Link to={`/users/${friend.user2.id}`}>{friend.user2.username}</Link>
+                            <Link to={`/users/${friend.user2.id}`}>{friend.user2.username.toUpperCase()}</Link>
                         </li>
                     ))}
                 </ul>

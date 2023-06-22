@@ -1,8 +1,5 @@
 /* CSS for DogList component */
-h1  {
-    text-align: center;
-    font-size: 50px;
-}
+
 
 .dog-grid {
     padding: 70px 50px;
@@ -64,5 +61,4 @@ h1  {
 
 .add-dog-card {
     font-size: 50px;
-
 }

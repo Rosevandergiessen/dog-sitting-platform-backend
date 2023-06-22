@@ -1,0 +1,39 @@
+.users-details-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+.users-details-container .container {
+    text-align: center;
+}
+
+.users-details-container h2,
+.users-details-container h3 {
+    margin-bottom: 10px;
+}
+
+.users-details-container p {
+    margin: 5px 0;
+    text-align: center; /* Add this line to center-align <p> tags */
+}
+
+.users-details-container ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.users-details-container li {
+    margin-bottom: 5px;
+}
+
+.users-details-container a {
+    text-decoration: none;
+    color: blue;
+    display: inline-block; /* Add this line to make <a> tags centered */
+    text-align: center; /* Add this line to center-align the text within <a> tags */
+}

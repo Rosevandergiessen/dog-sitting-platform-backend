@@ -21,7 +21,7 @@ export const RegisterForm = () => {
     };
 
     return (
-        <div className="register-form-container">
+        <div className="form-container">
             <h2>Register</h2>
             <form onSubmit={handleSubmit}>
                 <div className="form-group">

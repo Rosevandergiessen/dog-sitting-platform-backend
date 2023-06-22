@@ -16,7 +16,6 @@ const DogAdd = ({id}) => {
             breed,
             age: parseInt(age),
             description,
-            image
         };
 
         try {
@@ -52,7 +51,7 @@ const DogAdd = ({id}) => {
 
     return (
         <>
-            <button onClick={openModal}>Add new dog</button>
+            <button onClick={openModal}>ADD NEW DOG</button>
             {isAdding && (
                 <div className="modal">
                     <div className="modal-content">
@@ -74,7 +73,7 @@ const DogAdd = ({id}) => {
                                 Description:
                                 <textarea value={description} onChange={(e) => setDescription(e.target.value)} />
                             </label>
-                            <button type="submit">Add Dog</button>
+                            <button type="submit">ADD DOG</button>
                         </form>
                     </div>
                 </div>

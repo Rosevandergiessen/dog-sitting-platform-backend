@@ -42,11 +42,11 @@ export const LoginForm = () => {
     };
 
     return (
-        <div className="login-form-container">
-            <h2>Login</h2>
+        <div className="form-container">
+            <h2>USER LOGIN</h2>
             <form onSubmit={handleSubmit}>
                 <div className="form-group">
-                    <label htmlFor="username">Username:</label>
+                    <label htmlFor="username">USERNAME</label>
                     <input
                         type="text"
                         id="username"
@@ -57,7 +57,7 @@ export const LoginForm = () => {
                     />
                 </div>
                 <div className="form-group">
-                    <label htmlFor="password">Password:</label>
+                    <label htmlFor="password">PASSWORD</label>
                     <input
                         type="password"
                         id="password"
@@ -68,11 +68,10 @@ export const LoginForm = () => {
                     />
                 </div>
                 {error && <p>{error}</p>}
-                <button type="submit">Login</button>
+                <button type="submit">LOGIN</button>
             </form>
-            <p>
-                Don't have an account yet? <Link to="/register">Create an account</Link>
-            </p>
+            <p>DON'T HAVE AN ACCOUNT YET?</p>
+            <p><Link to="/register">CREATE AN ACCOUNT</Link></p>
         </div>
     );
 };

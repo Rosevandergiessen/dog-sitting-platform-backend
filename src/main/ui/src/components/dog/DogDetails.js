@@ -82,6 +82,7 @@ const DogDetails = () => {
                         <p>Start Time: {formatTime(request.startTime)}</p>
                         <p>End Time: {formatTime(request.endTime)}</p>
                         <p>Accepted: ✅ </p>
+                        <p>--------------------------------------</p>
                     </li>
                 ))}
             </ul>

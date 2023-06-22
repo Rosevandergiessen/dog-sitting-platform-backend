@@ -27,7 +27,7 @@ export const NavBar = () => {
                             <Link onClick={handleLogout} to="/get-started">LOGOUT</Link>
                         </div>
                     ) : (
-                        <Link to="/login">Login</Link>
+                        <Link to="/login">LOGIN</Link>
                     )}
                 </div>
             </div>

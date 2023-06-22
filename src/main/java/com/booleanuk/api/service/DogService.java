@@ -65,16 +65,6 @@ public class DogService {
        return existingDog;
     }
 
-    public Dog saveDogWithImage(String name, MultipartFile image) throws IOException {
-        Dog dog = new Dog();
-        dog.setName(name);
-
-        if (image != null && !image.isEmpty()) {
-            dog.setImage(image.getBytes());
-        }
-        return dogRepository.save(dog);
-    }
-
     public DogDTO getDogDtoWithOwner(int dogId) {
         Optional<Dog> optionalDog = dogRepository.findById(dogId);
         if (optionalDog.isPresent()) {
