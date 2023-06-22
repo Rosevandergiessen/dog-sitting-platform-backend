@@ -69,6 +69,11 @@ const DogList = () => {
                             >
                                 {dog.name.toUpperCase()}
                             </Link>
+                            <img
+                                className="dog-card-image"
+                                src={`https://source.unsplash.com/100x100/?${dog.breed}`}
+                                alt="Dog"
+                            />
                             <p className="dog-card-content">{dog.description.toUpperCase()}</p>
                             <p className="dog-card-content">{dog.breed.toUpperCase()}</p>
                             <p className="dog-card-content">{dog.age} YEARS OLD</p>

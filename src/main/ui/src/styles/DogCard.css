@@ -11,10 +11,14 @@
     flex-direction: column;
     border: 2px solid black;
     align-items: center;
-    padding: 40px 0 0 0;
+    padding: 40px 0 20px 0;
     margin-bottom: 0px;
     background: white;
     transition: transform 0.3s ease;
+}
+
+.dog-card p {
+    margin-bottom: 0;
 }
 
 .dog-card:hover {
@@ -60,6 +64,20 @@
     font-size: 50px;
 }
 
+.dog-card button {
+    margin-top: 10px;
+}
+
 .dog-card button:hover{
     background-color: #f3ce4e;
+}
+
+.dog-card-image {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }

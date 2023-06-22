@@ -1,5 +1,5 @@
 import AuthService from "../../services/AuthService";
-import {useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 import {Link} from "react-router-dom";
 import DogAdd from "../dog/DogsAdd";
 import RequestAdd from "../request/RequestAdd";
@@ -32,6 +32,11 @@ export const MyDogs = () => {
                 {dogs.map((dog) => (
                         <div className="dog-card">
                             <Link to={`/dogs/${dog.id}`} className="dog-card-link dog-card-name" key={dog.id}>{dog.name.toUpperCase()}</Link>
+                            <img
+                                className="dog-card-image"
+                                src={`https://source.unsplash.com/100x100/?${dog.breed}`}
+                                alt="Dog"
+                            />
                             <p className="dog-card-breed">{dog.breed.toUpperCase()}</p>
                             <p className="dog-card-age">{dog.age} YEARS OLD</p>
                             <p className="dog-card-description">{dog.description.toUpperCase()}</p>
