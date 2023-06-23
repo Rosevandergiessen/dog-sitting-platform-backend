@@ -13,7 +13,8 @@
 .home h1 {
     font-size: 120px;
     font-weight: bold;
-    margin-bottom: 50px
+    margin-bottom: 50px;
+    text-shadow: 5px 5px 0px rgb(38, 215, 134);
 }
 
 .home p {

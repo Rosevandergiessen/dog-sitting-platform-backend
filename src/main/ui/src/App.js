@@ -17,6 +17,8 @@ import {MyFriends} from "./components/user/MyFriends";
 import {MyRequests} from "./components/request/MyRequests";
 import {AcceptedRequests} from "./components/request/AcceptedRequests";
 import {MyDogs} from "./components/user/MyDogs";
+import {Logo} from "./components/Logo";
+import {BackButton} from "./components/BackButton";
 
 
 
@@ -39,8 +41,9 @@ export default function App() {
                 </header>
             )}
             {showBack && (
-                <div>
-                    <button className="backButton" onClick={handleGoBack}>⇦</button>
+                <div className="logo-back-button-container">
+                    <BackButton />
+                    <Logo />
                 </div>
             )}
             <main>

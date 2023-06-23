@@ -64,6 +64,11 @@ const DogDetails = () => {
     return (
         <div className="dog-details-container">
             <h1>{dog.name.toUpperCase()}</h1>
+            <img
+                className="dog-card-image"
+                src={`https://source.unsplash.com/100x100/?${dog.breed}`}
+                alt="Dog"
+            />
             <span>breed</span>
             <p> {dog.breed.toUpperCase()}</p>
             <span>age</span>

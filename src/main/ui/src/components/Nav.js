@@ -8,7 +8,6 @@ export const NavBar = () => {
 
     const handleLogout = () => {
         AuthService.logout();
-        // Perform any additional logout logic or redirection
     };
 
     return (
@@ -18,7 +17,8 @@ export const NavBar = () => {
                     <NavLink to="/get-started">HOME</NavLink>
                     <NavLink to="/dogs">DOGS</NavLink>
                     <NavLink to="/my-friends">FRIENDS</NavLink>
-                    <NavLink to="/requests">REQUESTS</NavLink>
+                    <NavLink to="/my-requests">MY REQUESTS</NavLink>
+                    <NavLink to="/accepted-requests">ACCEPTED REQUESTS</NavLink>
                 </div>
                 <div className="navbar-right">
                     {currentUser ? (
