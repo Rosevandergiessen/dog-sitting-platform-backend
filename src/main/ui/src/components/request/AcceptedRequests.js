@@ -89,6 +89,13 @@ export const AcceptedRequests = () => {
         setSelectedRequest(null);
     };
 
+    const views = {
+        month: true,
+        week: true,
+        day: true,
+        agenda: acceptedRequests.length > 0 // Set agenda view to true only if there are accepted requests
+    };
+
     return (
         <div className="request-container">
             <h1>Accepted Requests</h1>
@@ -103,10 +110,11 @@ export const AcceptedRequests = () => {
                         style={{ height: 500 }}
                         tooltipAccessor={() => null} // Disable default tooltip
                         onSelectEvent={handleEventClick} // Event click handler
+                        views={views}
                     />
                 </div>
             ) : (
-                <h2>You haven't accepted any requests yet</h2>
+                <h3>Loading....</h3>
             )}
             {selectedRequest && (
                 <div className="modal">
