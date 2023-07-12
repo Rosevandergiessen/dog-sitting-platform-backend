@@ -2,6 +2,7 @@ import React, {useEffect, useState} from "react";
 import AuthService from "../../services/AuthService";
 import moment from "moment";
 import '../../styles/Requests.css'
+import { createEvent } from 'ics';
 
 export const AcceptedRequests = () => {
     const [requests, setRequests] = useState([]);
@@ -26,7 +27,6 @@ export const AcceptedRequests = () => {
     const requestArray = Object.values(requests)
     const acceptedRequests = requestArray.filter((request) => request.accepted);
 
-
     const formatTime = (time) => {
         return moment(time).format('dddd MMMM Do YYYY h:mm a');
     }
@@ -38,6 +38,38 @@ export const AcceptedRequests = () => {
     if (requests.length === 0) {
         return <h3>You have not accepted any requests yet</h3>;
     }
+
+    const downloadICS = (text, filename) => {
+        const element = document.createElement('a');
+        element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
+        element.setAttribute('download', filename);
+        element.style.display = 'none';
+        document.body.appendChild(element);
+        element.click();
+        document.body.removeChild(element);
+    };
+
+    const generateICS = (startDateString, endDateString, description) => {
+        const startDate = new Date(startDateString);
+        const endDate = new Date(endDateString);
+
+        const event = {
+            start: [startDate.getFullYear(), startDate.getMonth() + 1, startDate.getDate(), startDate.getHours(), startDate.getMinutes()],
+            end: [endDate.getFullYear(), endDate.getMonth() + 1, endDate.getDate(), endDate.getHours(), endDate.getMinutes()],
+            title: 'Paw Pact Dog Sitting Appointment - ' + description,
+        };
+
+        createEvent(event, (error, value) => {
+            if (error) {
+                console.error(error);
+                return;
+            }
+
+            downloadICS(value, 'event.ics');
+        });
+    };
+
+
 
     return(
         <div className="request-container">
@@ -59,6 +91,9 @@ export const AcceptedRequests = () => {
                                     .diff(moment(request.startTime)))
                                     .asHours() + ' hours'
                             }</p>
+                                <button onClick={() => generateICS(request.startTime, request.endTime, request.dog.name)}>
+                                    Download .ics
+                                </button>
                                 <p>-------------------------------------------------------</p>
                             </div>)
                                 : null}
