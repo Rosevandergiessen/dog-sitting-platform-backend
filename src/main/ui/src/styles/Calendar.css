@@ -1,0 +1,98 @@
+/* Calendar Container */
+.calendar-container {
+    max-width: 1500px;
+    margin: 40px 0 auto;
+}
+
+/* Calendar Header */
+.rbc-toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+/* Calendar Navigation Buttons */
+.rbc-btn-group {
+    display: flex;
+}
+
+.rbc-btn-group button {
+    margin-right: 10px;
+    padding: 5px 10px;
+    font-size: 14px;
+    border: none;
+    background-color: #f0f0f0;
+    color: #333;
+    cursor: pointer;
+}
+
+.rbc-btn-group button:hover {
+    background-color: #ddd;
+}
+
+/* Calendar Month View */
+/*.rbc-month-view {*/
+/*    display: grid;*/
+/*    grid-template-columns: repeat(7, 1fr);*/
+/*    grid-gap: 10px;*/
+/*}*/
+
+/* Calendar Weekday Header */
+.rbc-row.rbc-header {
+    text-align: center;
+    font-weight: bold;
+    border-bottom: 1px solid #ddd;
+}
+
+/* Calendar Event */
+.rbc-event {
+    background-color: #26d786;
+    color: #fff;
+    padding: 2px 5px;
+    font-size: 14px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.rbc-event:hover {
+    background-color: #f63c5e;
+}
+
+/* Calendar Event Tooltip */
+.rbc-overlay {
+    background-color: #333;
+    color: #fff;
+    padding: 10px;
+    border-radius: 4px;
+}
+
+/* Modal */
+.modal {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 100;
+}
+
+.modal-content {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+}

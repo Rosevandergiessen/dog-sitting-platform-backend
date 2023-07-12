@@ -1,13 +1,20 @@
-import React, {useEffect, useState} from "react";
-import AuthService from "../../services/AuthService";
+import React, { useEffect, useState } from "react";
 import moment from "moment";
-import '../../styles/Requests.css'
+import '../../styles/Requests.css';
+import { Calendar, momentLocalizer } from 'react-big-calendar';
+import 'react-big-calendar/lib/css/react-big-calendar.css';
 import { createEvent } from 'ics';
+import AuthService from "../../services/AuthService";
+import '../../styles/Calendar.css'
+
+const localizer = momentLocalizer(moment);
 
 export const AcceptedRequests = () => {
     const [requests, setRequests] = useState([]);
-    const currentUser = AuthService.getCurrentUser();
+    const [events, setEvents] = useState([]);
+    const [selectedRequest, setSelectedRequest] = useState(null);
 
+    const currentUser = AuthService.getCurrentUser();
 
     useEffect(() => {
         fetchRequests();
@@ -24,19 +31,23 @@ export const AcceptedRequests = () => {
         }
     }
 
-    const requestArray = Object.values(requests)
-    const acceptedRequests = requestArray.filter((request) => request.accepted);
+    const acceptedRequests = requests.filter((request) => request.accepted && request.sitter && request.sitter.username === currentUser.username);
+
+    useEffect(() => {
+        const calendarEvents = acceptedRequests.map((request) => {
+            return {
+                title: `Paw Pact Dog Sitting Appointment - ${request.dog.name}`,
+                start: new Date(request.startTime),
+                end: new Date(request.endTime),
+                id: request.id,
+            };
+        });
+
+        setEvents(calendarEvents);
+    }, [acceptedRequests]);
 
     const formatTime = (time) => {
         return moment(time).format('dddd MMMM Do YYYY h:mm a');
-    }
-
-    if (!requests) {
-        return <h3>Loading...</h3>;
-    }
-
-    if (requests.length === 0) {
-        return <h3>You have not accepted any requests yet</h3>;
     }
 
     const downloadICS = (text, filename) => {
@@ -69,36 +80,56 @@ export const AcceptedRequests = () => {
         });
     };
 
+    const handleEventClick = (event) => {
+        const clickedRequest = acceptedRequests.find((request) => request.id === event.id);
+        setSelectedRequest(clickedRequest);
+    };
 
+    const handleCloseModal = () => {
+        setSelectedRequest(null);
+    };
 
-    return(
+    return (
         <div className="request-container">
             <h1>Accepted Requests</h1>
-            <ul>
-                {acceptedRequests.length > 0 ? (acceptedRequests.map((request) => (
-                            <div key={request.id}>
-                            {request.sitter && request.sitter.username === currentUser.username ? (
-                            <div>
-                            <p>Dog: {request.dog.name}</p>
-                            <p>Start Time: {formatTime(request.startTime)}</p>
-                            <p>End Time: {formatTime(request.endTime)}</p>
-                            <p>Duration: {
-                                moment.duration(moment(request.endTime)
-                                    .diff(moment(request.startTime)))
-                                    .asHours() >= 24 ? moment.duration(moment(request.endTime)
-                                    .diff(moment(request.startTime)))
-                                    .asDays() + ' days' : moment.duration(moment(request.endTime)
-                                    .diff(moment(request.startTime)))
-                                    .asHours() + ' hours'
-                            }</p>
-                                <button onClick={() => generateICS(request.startTime, request.endTime, request.dog.name)}>
-                                    Download .ics
-                                </button>
-                                <p>-------------------------------------------------------</p>
-                            </div>)
-                                : null}
-                            </div>
-                ))) : (<h2>You don't have accepted any requests yet</h2>)}
-            </ul>
-        </div>)
-}
+            {events.length > 0 ? (
+                <div className="calendar-container">
+                    <Calendar
+                        localizer={localizer}
+                        events={events}
+                        startAccessor="start"
+                        endAccessor="end"
+                        className="rbc-calendar"
+                        style={{ height: 500 }}
+                        tooltipAccessor={() => null} // Disable default tooltip
+                        onSelectEvent={handleEventClick} // Event click handler
+                    />
+                </div>
+            ) : (
+                <h2>You haven't accepted any requests yet</h2>
+            )}
+            {selectedRequest && (
+                <div className="modal">
+                    <div className="modal-content">
+            <span className="close" onClick={handleCloseModal}>
+              &times;
+            </span>
+                        <p>Dog: {selectedRequest.dog.name}</p>
+                        <p>Start Time: {formatTime(selectedRequest.startTime)}</p>
+                        <p>End Time: {formatTime(selectedRequest.endTime)}</p>
+                        <p>Duration: {moment.duration(moment(selectedRequest.endTime)
+                            .diff(moment(selectedRequest.startTime)))
+                            .asHours() >= 24 ? moment.duration(moment(selectedRequest.endTime)
+                            .diff(moment(selectedRequest.startTime)))
+                            .asDays() + ' days' : moment.duration(moment(selectedRequest.endTime)
+                            .diff(moment(selectedRequest.startTime)))
+                            .asHours() + ' hours'}</p>
+                        <button onClick={() => generateICS(selectedRequest.startTime, selectedRequest.endTime, selectedRequest.dog.name)}>
+                            Download .ics
+                        </button>
+                    </div>
+                </div>
+            )}
+        </div>
+    );
+};

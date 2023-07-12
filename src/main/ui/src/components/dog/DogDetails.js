@@ -79,17 +79,15 @@ const DogDetails = () => {
             <span>description</span>
             <p> {dog.description.toUpperCase()}</p>
 
-            {/*{currentUser && currentUser.id === dog.user.id ? (  <>*/}
-            {/*    <p className="own-dog">THIS IS YOUR DOG</p>*/}
-            {/*    <DogDelete id={id} />*/}
-            {/*    <DogUpdate id={id} />*/}
-            {/*</>) :*/}
-            {/*    <>*/}
-            {/*    <span>human</span>*/}
-            {/*    <Link to={`/users/${dog.user.id}`}>{dog.user.username.toUpperCase()}</Link>*/}
-            {/*    </>}*/}
-
-            <DogUpdate id={id} />
+            {currentUser && currentUser.id === dog.user.id ? (  <>
+                <p className="own-dog">THIS IS YOUR DOG</p>
+                <DogDelete id={id} />
+                <DogUpdate id={id} />
+            </>) :
+                <>
+                <span>human</span>
+                <Link to={`/users/${dog.user.id}`}>{dog.user.username.toUpperCase()}</Link>
+                </>}
 
             <h3 className="accepted-requests">ACCEPTED REQUEST(S)</h3>
             <ul>
