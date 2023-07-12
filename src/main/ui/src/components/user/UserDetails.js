@@ -53,6 +53,13 @@ function UsersDetails() {
             <ul>
                 {user.dogs.map((dog) => (
                     <li key={dog.id}>
+                        {dog.image && (
+                            <img
+                                className="dog-card-image"
+                                src={`data:image/*;base64,${dog.image}`}
+                                alt="Dog"
+                            />
+                        )}
                         <Link to={`/dogs/${dog.id}`}>{dog.name.toUpperCase()}</Link>
                     </li>
                 ))}

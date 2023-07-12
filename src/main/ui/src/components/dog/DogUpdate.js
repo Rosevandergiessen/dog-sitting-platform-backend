@@ -8,6 +8,7 @@ const DogUpdate = () => {
     const [breed, setBreed] = useState('');
     const [age, setAge] = useState('');
     const [description, setDescription] = useState('');
+    const [imageFile, setImageFile] = useState(null);
     const [isEditing, setIsEditing] = useState(false);
 
     const fetchDog = async () => {
@@ -19,6 +20,7 @@ const DogUpdate = () => {
             setBreed(dogData.breed);
             setAge(dogData.age.toString());
             setDescription(dogData.description);
+            setImageFile(dogData.image);
         } catch (error) {
             console.error('Error fetching dog:', error);
         }
@@ -31,20 +33,17 @@ const DogUpdate = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        const dogData = {
-            name,
-            breed,
-            age: parseInt(age),
-            description,
-        };
+        const formData = new FormData();
+        formData.append('name', name);
+        formData.append('breed', breed);
+        formData.append('age', age);
+        formData.append('description', description);
+        formData.append('image', imageFile);
 
         try {
             const response = await fetch(`http://localhost:8080/dogs/${id}`, {
                 method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(dogData),
+                body: formData,
             });
 
             if (response.ok) {
@@ -92,6 +91,10 @@ const DogUpdate = () => {
                             <label>
                                 Description:
                                 <textarea value={description} onChange={(e) => setDescription(e.target.value)} />
+                            </label>
+                            <label>
+                                Image:
+                                <input type="file" name="image" accept="image/*" required={false} onChange={(e) => setImageFile(e.target.files[0])} />
                             </label>
                             <button type="submit">Update Dog</button>
                         </form>
