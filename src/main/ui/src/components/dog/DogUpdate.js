@@ -8,7 +8,6 @@ const DogUpdate = () => {
     const [breed, setBreed] = useState('');
     const [age, setAge] = useState('');
     const [description, setDescription] = useState('');
-    const [imageFile, setImageFile] = useState(null);
     const [isEditing, setIsEditing] = useState(false);
 
     const fetchDog = async () => {
@@ -93,10 +92,6 @@ const DogUpdate = () => {
                             <label>
                                 Description:
                                 <textarea value={description} onChange={(e) => setDescription(e.target.value)} />
-                            </label>
-                            <label>
-                                Image:
-                                <input type="file" name="image" accept="image/*" onChange={(e) => setImageFile(e.target.files[0])} />
                             </label>
                             <button type="submit">Update Dog</button>
                         </form>

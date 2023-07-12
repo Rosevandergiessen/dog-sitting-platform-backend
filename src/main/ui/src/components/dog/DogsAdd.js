@@ -74,7 +74,7 @@ const DogAdd = ({id}) => {
                             </label>
                             <label>
                                 Image:
-                                <input type="file" name="image" accept="image/*" onChange={(e) => setImageFile(e.target.files[0])} />
+                                <input type="file" name="image" accept="image/*" required={false} onChange={(e) => setImageFile(e.target.files[0])} />
                             </label>
                             <button type="submit">ADD DOG</button>
                         </form>

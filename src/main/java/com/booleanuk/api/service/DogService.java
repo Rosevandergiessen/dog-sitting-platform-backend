@@ -75,9 +75,39 @@ public class DogService {
         existingDog.setBreed(updatedDog.getBreed());
         existingDog.setAge(updatedDog.getAge());
         existingDog.setDescription(updatedDog.getDescription());
-        existingDog.setImageData(updatedDog.getImageData());
         return dogRepository.save(existingDog);
     }
+
+//    @Transactional
+//    public DogDTO updateDog(int id, Dog updatedDog, MultipartFile imageFile) {
+//        Dog existingDog = dogRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Dog not found."));
+//        existingDog.setName(updatedDog.getName());
+//        existingDog.setBreed(updatedDog.getBreed());
+//        existingDog.setAge(updatedDog.getAge());
+//        existingDog.setDescription(updatedDog.getDescription());
+//
+//        if (imageFile != null) {
+//            try {
+//                byte[] imageData = imageFile.getBytes();
+//                existingDog.setImageData(imageData);
+//            } catch (IOException e) {
+//                throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Failed to process the image.");
+//            }
+//        }
+//
+//        Dog updatedDogEntity = dogRepository.save(existingDog);
+//
+//        DogDTO updatedDogDTO = new DogDTO();
+//        updatedDogDTO.setId(updatedDogEntity.getId());
+//        updatedDogDTO.setName(updatedDogEntity.getName());
+//        updatedDogDTO.setBreed(updatedDogEntity.getBreed());
+//        updatedDogDTO.setAge(updatedDogEntity.getAge());
+//        updatedDogDTO.setDescription(updatedDogEntity.getDescription());
+//        updatedDogDTO.setUser(updatedDogEntity.getUser());
+//        updatedDogDTO.setImage(updatedDogEntity.getImageData());
+//
+//        return updatedDogDTO;
+//    }
 
     public Dog deleteDog(int id) {
        Dog existingDog = dogRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Dog not found."));

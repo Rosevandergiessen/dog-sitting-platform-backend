@@ -47,6 +47,15 @@ public class DogController {
         return ResponseEntity.ok(dogService.updateDog(id, updatedDog));
     }
 
+//    @PutMapping("/{id}")
+//    public ResponseEntity<DogDTO> updateDog(
+//            @PathVariable("id") int id,
+//            @RequestBody Dog updatedDog,
+//            @RequestParam(value = "image", required = false) MultipartFile imageFile
+//    ) {
+//        return ResponseEntity.ok(dogService.updateDog(id, updatedDog, imageFile));
+//    }
+
     @PostMapping("/{userId}")
     public ResponseEntity<Dog> createDog(@PathVariable int userId, @ModelAttribute Dog dog, @RequestParam("image") MultipartFile imageFile) {
         User user = userService.getUserById(userId);
