@@ -9,6 +9,7 @@ public class DogDTO {
     private int age;
     private String description;
     private User user;
+    private byte[] image;
 
     public int getId() {
         return id;
@@ -56,5 +57,13 @@ public class DogDTO {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public byte[] getImage() {
+        return this.image;
+    }
+
+    public void setImage(byte[] image) {
+        this.image = image;
     }
 }

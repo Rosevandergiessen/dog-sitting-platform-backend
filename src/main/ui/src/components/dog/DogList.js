@@ -9,7 +9,6 @@ const DogList = () => {
     const [dogs, setDogs] = useState([]);
     const currentUser = AuthService.getCurrentUser();
     const [friends, setFriends] = useState([]);
-    const navigate = useNavigate();
 
     useEffect(() => {
         fetchDogs();
@@ -69,11 +68,13 @@ const DogList = () => {
                             >
                                 {dog.name.toUpperCase()}
                             </Link>
-                            <img
-                                className="dog-card-image"
-                                src={`https://source.unsplash.com/100x100/?${dog.breed}`}
-                                alt="Dog"
-                            />
+                            {dog.image && (
+                                <img
+                                    className="dog-card-image"
+                                    src={`data:image/*;base64,${dog.image}`}
+                                    alt="Dog"
+                                />
+                            )}
                             <p className="dog-card-content">{dog.description.toUpperCase()}</p>
                             <p className="dog-card-content">{dog.breed.toUpperCase()}</p>
                             <p className="dog-card-content">{dog.age} YEARS OLD</p>

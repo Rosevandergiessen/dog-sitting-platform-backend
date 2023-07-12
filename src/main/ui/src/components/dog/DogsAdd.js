@@ -6,25 +6,23 @@ const DogAdd = ({id}) => {
     const [breed, setBreed] = useState('');
     const [age, setAge] = useState('');
     const [description, setDescription] = useState('');
+    const [imageFile, setImageFile] = useState(null);
     const [isAdding, setIsAdding] = useState(false);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        const dogData = {
-            name,
-            breed,
-            age: parseInt(age),
-            description,
-        };
+        const formData = new FormData();
+        formData.append('name', name);
+        formData.append('breed', breed);
+        formData.append('age', age);
+        formData.append('description', description);
+        formData.append('image', imageFile);
 
         try {
             const response = await fetch(`http://localhost:8080/dogs/${id}`, {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(dogData),
+                body: formData,
             });
 
             if (response.ok) {
@@ -56,6 +54,7 @@ const DogAdd = ({id}) => {
                 <div className="modal">
                     <div className="modal-content">
                         <span className="close" onClick={closeModal}>&times;</span>
+
                         <form onSubmit={handleSubmit}>
                             <label>
                                 Name:
@@ -72,6 +71,10 @@ const DogAdd = ({id}) => {
                             <label>
                                 Description:
                                 <textarea value={description} onChange={(e) => setDescription(e.target.value)} />
+                            </label>
+                            <label>
+                                Image:
+                                <input type="file" name="image" accept="image/*" onChange={(e) => setImageFile(e.target.files[0])} />
                             </label>
                             <button type="submit">ADD DOG</button>
                         </form>

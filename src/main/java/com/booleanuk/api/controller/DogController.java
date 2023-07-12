@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -47,10 +48,10 @@ public class DogController {
     }
 
     @PostMapping("/{userId}")
-    public ResponseEntity<Dog> createDog(@PathVariable int userId, @RequestBody Dog dog) {
+    public ResponseEntity<Dog> createDog(@PathVariable int userId, @ModelAttribute Dog dog, @RequestParam("image") MultipartFile imageFile) {
         User user = userService.getUserById(userId);
         dog.setUser(user);
-        return new ResponseEntity<>(dogService.createDog(dog), HttpStatus.CREATED);
+        return new ResponseEntity<>(dogService.createDog(dog, imageFile), HttpStatus.CREATED);
     }
 
     @DeleteMapping("/{id}")

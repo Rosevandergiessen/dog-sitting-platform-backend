@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react"
 import AuthService from "../../services/AuthService";
 import '../../styles/MyFriends.css';
-import {Link} from "react-router-dom";
+import {Link, NavLink} from "react-router-dom";
 
 export const MyFriends = () =>  {
     const [friends, setFriends] = useState([])
@@ -32,7 +32,7 @@ export const MyFriends = () =>  {
             {friends.length === 0 ? (
                 <h3>
                     YOU DON'T HAVE ANY FRIENDS YET,{" "}
-                    <Link to={"/add-a-friend"}>ADD A FRIEND!</Link>
+                    <NavLink to={"/add-a-friend"}>ADD A FRIEND!</NavLink>
                 </h3>
             ) : (
                 <h1>MY FRIENDS</h1>

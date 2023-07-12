@@ -2,9 +2,13 @@ package com.booleanuk.api.service;
 
 import com.booleanuk.api.DTO.DogDTO;
 import com.booleanuk.api.model.Dog;
-import com.booleanuk.api.model.Request;
+
 import com.booleanuk.api.model.User;
 import com.booleanuk.api.repository.DogRepository;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
+import jakarta.transaction.Transactional;
+import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -21,6 +25,8 @@ public class DogService {
     @Autowired
     private DogRepository dogRepository;
 
+    @PersistenceContext
+    private EntityManager entityManager;
 
     public List<DogDTO> getAllDogs() {
         List<Dog> dogs = dogRepository.findAll();
@@ -33,6 +39,7 @@ public class DogService {
                     dogDto.setAge(dog.getAge());
                     dogDto.setUser(dog.getUser());
                     dogDto.setDescription(dog.getDescription());
+                    dogDto.setImage(dog.getImageData());
                     return dogDto;
                 })
                 .collect(Collectors.toList());
@@ -46,8 +53,20 @@ public class DogService {
         return dogRepository.findById(id).orElse(null);
     }
 
-    public Dog createDog(Dog dog) {
-        return dogRepository.save(dog);
+    @Transactional
+    public Dog createDog(Dog dog, MultipartFile imageFile) {
+        try {
+            byte[] imageData = IOUtils.toByteArray(imageFile.getInputStream());
+            dog.setImageData(imageData);
+            Dog savedDog = dogRepository.save(dog);
+
+            // Commit the transaction explicitly
+            entityManager.flush();
+            return savedDog;
+        } catch (IOException e) {
+            // Handle the exception accordingly
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Failed to process the image.");
+        }
     }
 
     public Dog updateDog(int id, Dog updatedDog) {
@@ -56,6 +75,7 @@ public class DogService {
         existingDog.setBreed(updatedDog.getBreed());
         existingDog.setAge(updatedDog.getAge());
         existingDog.setDescription(updatedDog.getDescription());
+        existingDog.setImageData(updatedDog.getImageData());
         return dogRepository.save(existingDog);
     }
 
@@ -77,6 +97,7 @@ public class DogService {
             dogDto.setAge(dog.getAge());
             dogDto.setDescription(dog.getDescription());
             dogDto.setUser(user);
+            dogDto.setImage(dog.getImageData());
             return dogDto;
         }
         return null;

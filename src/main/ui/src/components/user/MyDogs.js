@@ -30,13 +30,15 @@ export const MyDogs = () => {
 
             <div className="dog-grid">
                 {dogs.map((dog) => (
-                        <div className="dog-card">
-                            <Link to={`/dogs/${dog.id}`} className="dog-card-link dog-card-name" key={dog.id}>{dog.name.toUpperCase()}</Link>
-                            <img
-                                className="dog-card-image"
-                                src={`https://source.unsplash.com/100x100/?${dog.breed}`}
-                                alt="Dog"
-                            />
+                        <div className="dog-card" key={dog.id}>
+                            <Link to={`/dogs/${dog.id}`} className="dog-card-link dog-card-name">{dog.name.toUpperCase()}</Link>
+                            {dog.imageData && (
+                                <img
+                                    className="dog-card-image"
+                                    src={`data:image/*;base64,${dog.imageData}`}
+                                    alt="Dog"
+                                />
+                            )}
                             <p className="dog-card-breed">{dog.breed.toUpperCase()}</p>
                             <p className="dog-card-age">{dog.age} YEARS OLD</p>
                             <p className="dog-card-description">{dog.description.toUpperCase()}</p>

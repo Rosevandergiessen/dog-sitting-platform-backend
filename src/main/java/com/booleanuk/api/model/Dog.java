@@ -2,6 +2,10 @@ package com.booleanuk.api.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
+import org.hibernate.annotations.Type;
 
 import java.util.List;
 
@@ -29,6 +33,10 @@ public class Dog {
     @Column(name = "description")
     private String description;
 
+    @Column(name = "image_data")
+    @Lob
+    private byte[] imageData;
+
     @OneToMany(mappedBy = "dog", cascade = CascadeType.ALL)
     private List<Request> requests;
 
@@ -37,12 +45,13 @@ public class Dog {
         super();
     }
 
-    public Dog(String name, String breed, int age, String description) {
+    public Dog(String name, String breed, int age, String description, byte[] imageData) {
         super();
         this.name = name;
         this.breed = breed;
         this.age = age;
         this.description = description;
+        this.imageData = imageData;
     }
 
     public Dog(String name, String breed, int age, String description, User user) {
@@ -103,5 +112,11 @@ public class Dog {
         this.description = description;
     }
 
+    public byte[] getImageData() {
+        return imageData;
+    }
 
+    public void setImageData(byte[] imageData) {
+        this.imageData = imageData;
+    }
 }
