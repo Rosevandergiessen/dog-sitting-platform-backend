@@ -1,5 +1,8 @@
 import AuthService from "../../services/AuthService";
 import React, {useEffect, useState} from "react";
+import '../../styles/MyProfile.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPencilAlt } from '@fortawesome/free-solid-svg-icons';
 
 export const Profile = () => {
     const currentUser = AuthService.getCurrentUser();
@@ -63,19 +66,23 @@ export const Profile = () => {
     }
 
  return (
-     <div>
+     <div className="profile-container">
         <h1>MY PROFILE</h1>
          {user.imageData && (
-             <img
-                 className="dog-card-image"
-                 src={`data:image/*;base64,${user.imageData}`}
-                 alt="User photo"
-             />
+             <div className="profile-picture-container">
+                 <img
+                     className="profile-picture"
+                     src={`data:image/*;base64,${user.imageData}`}
+                     alt="User photo"
+                 />
+                 <div className="edit-icon" onClick={openModal}>
+                     <FontAwesomeIcon className="fas fa-pencil-alt" icon={faPencilAlt} />
+                 </div>
+             </div>
          )}
-        <h3>{currentUser.username.toUpperCase()}</h3>
-        <h3>{currentUser.email.toUpperCase()}</h3>
-         <>
-             <button onClick={openModal}>Add Image</button>
+        <h3 className="profile-username">{currentUser.username.toUpperCase()}</h3>
+        <h4 className="email">{currentUser.email}</h4>
+         <div>
              {isUpdating && (
                  <div className="modal">
                      <div className="modal-content">
@@ -86,11 +93,11 @@ export const Profile = () => {
                                  <input type="file" name="image" accept="image/*" required={false}
                                         onChange={(e) => setImageFile(e.target.files[0])}/>
                              </label>
-                             <button type="submit">Add Image</button>
+                             <button type="submit">Upload</button>
                          </form>
                      </div>
                  </div>
              )}
-         </>
+         </div>
      </div>
  )}
