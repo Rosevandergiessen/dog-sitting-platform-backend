@@ -1,8 +1,11 @@
 .get-started-container {
     display: flex;
     justify-content: center;
-    padding: 0px;
+    margin-bottom: 50px;
+    height: 100vh;
     align-content: center;
+    background-image: url('https://unsplash.com/photos/aI3EBLvcyu4/download?force=true&w=1920');
+    background-position: center center;
 }
 
 .get-started-container > div {

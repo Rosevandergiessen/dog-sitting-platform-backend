@@ -4,6 +4,7 @@ import {Link} from "react-router-dom";
 import DogAdd from "../dog/DogsAdd";
 import RequestAdd from "../request/RequestAdd";
 import '../../styles/DogCard.css';
+import '../../styles/DogList.css';
 
 export const MyDogs = () => {
     const currentUser = AuthService.getCurrentUser();
@@ -25,7 +26,7 @@ export const MyDogs = () => {
     }
 
     return (
-        <div>
+        <div className="my-dog-list-container">
             <h1>MY DOGS</h1>
 
             <div className="dog-grid">

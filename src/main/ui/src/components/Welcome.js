@@ -2,13 +2,15 @@ import React from 'react';
 import AuthService from '../services/AuthService';
 import { Link } from 'react-router-dom';
 import '../styles/Welcome.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {faPaw, faPencilAlt} from '@fortawesome/free-solid-svg-icons';
 
 export const Welcome = () => {
     const currentUser = AuthService.getCurrentUser();
 
     return (
         <div className="welcome-container">
-            <h2>WELCOME {currentUser && currentUser.username.toUpperCase()}.</h2>
+            <h2>WELCOME {currentUser && currentUser.username.toUpperCase()} <FontAwesomeIcon icon={faPaw} /></h2>
             <div className="card-container">
                 <div className="card-row">
                     <Link to="/my-profile" className="card">

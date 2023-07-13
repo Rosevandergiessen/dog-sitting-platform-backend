@@ -68,18 +68,22 @@ export const Profile = () => {
  return (
      <div className="profile-container">
         <h1>MY PROFILE</h1>
-         {user.imageData && (
              <div className="profile-picture-container">
+                 {user.imageData === null ? (
+                     <img
+                         className={"profile-picture"}
+                         src={"https://static.vecteezy.com/system/resources/previews/002/534/006/non_2x/social-media-chatting-online-blank-profile-picture-head-and-body-icon-people-standing-icon-grey-background-free-vector.jpg"}
+                         alt={"User photo"}/>
+                    ) : (
                  <img
                      className="profile-picture"
                      src={`data:image/*;base64,${user.imageData}`}
                      alt="User photo"
-                 />
+                 />)}
                  <div className="edit-icon" onClick={openModal}>
                      <FontAwesomeIcon className="fa-pencil-alt" icon={faPencilAlt} />
                  </div>
              </div>
-         )}
         <h3 className="profile-username">{currentUser.username.toUpperCase()}</h3>
         <h4 className="email">{currentUser.email}</h4>
          <div>

@@ -4,6 +4,8 @@
     align-items: center;
     justify-content: center;
     text-align: center;
+    background-image: url('https://unsplash.com/photos/wvnSt-oYIB4/download?force=true&w=1700');
+    height: 80vh;
 }
 
 .request-container p span {

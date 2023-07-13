@@ -3,6 +3,7 @@ import {Link, useNavigate} from "react-router-dom";
 import  '../../styles/DogCard.css';
 import AuthService from '../../services/AuthService';
 import addFriend from "../../services/UserService";
+import '../../styles/DogList.css';
 
 
 const DogList = () => {
@@ -53,7 +54,7 @@ const DogList = () => {
     const userFriends = friends.map((friend) => friend.user2);
 
     return (
-        <>
+        <div className="dog-list-container">
             <h1>DOGS</h1>
             <div className="dog-grid">
                 {dogs.map((dog) => {
@@ -96,7 +97,7 @@ const DogList = () => {
                     );
                 })}
             </div>
-        </>
+        </div>
     );
 };
 export default DogList;
