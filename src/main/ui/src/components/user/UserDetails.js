@@ -5,11 +5,11 @@ import AuthService from "../../services/AuthService";
 import '../../styles/UserDetails.css'
 
 function UsersDetails() {
-    const [user, setUser] = useState(false);
+    const {id} = useParams();
+    const [user, setUser] = useState(null);
     const [friends, setFriends] = useState([]);
-    const currentUser = AuthService.getCurrentUser();
 
-    const { id } = useParams();
+    const currentUser = AuthService.getCurrentUser();
 
     useEffect(() => {
         fetchUser();
@@ -46,10 +46,10 @@ function UsersDetails() {
 
     return (
         <div className="users-details-container">
-            <h2 >{user.username.toUpperCase()}</h2>
-            <p >{user.email.toUpperCase()}</p>
-            <h3 >DOGS</h3>
-            {currentUser && currentUser.id === Number(id) ? <DogAdd /> : null}
+            <h2>{user.username.toUpperCase()}</h2>
+            <p>{user.email.toUpperCase()}</p>
+            <h3>DOGS</h3>
+            {currentUser && currentUser.id === Number(id) ? <DogAdd/> : null}
             <ul>
                 {user.dogs.map((dog) => (
                     <li key={dog.id}>
@@ -64,7 +64,7 @@ function UsersDetails() {
                     </li>
                 ))}
             </ul>
-            <h3 >Friends</h3>
+            <h3>Friends</h3>
             <ul>
                 {friends.map((friend) => (
                     <li key={friend.id}>

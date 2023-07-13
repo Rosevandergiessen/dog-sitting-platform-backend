@@ -21,6 +21,10 @@ public class User {
     @Column(name = "password")
     private String password;
 
+    @Column(name = "image_data")
+    @Lob
+    private byte[] imageData;
+
     @OneToMany(mappedBy = "user", cascade = { CascadeType.REMOVE, CascadeType.PERSIST })
     private List<Dog> dogs;
 
@@ -85,5 +89,13 @@ public class User {
 
     public void setDogs(List<Dog> dogs) {
         this.dogs = dogs;
+    }
+
+    public byte[] getImageData() {
+        return imageData;
+    }
+
+    public void setImageData(byte[] imageData) {
+        this.imageData = imageData;
     }
 }

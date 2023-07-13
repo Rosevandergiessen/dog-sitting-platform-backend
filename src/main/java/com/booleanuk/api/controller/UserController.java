@@ -8,6 +8,7 @@ import com.booleanuk.api.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -44,8 +45,12 @@ public class UserController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<User> updateUser(@PathVariable("id") int id, @RequestBody User updatedUser) {
-        return ResponseEntity.ok(userService.updateUser(id, updatedUser));
+    public ResponseEntity<User> updateUser(
+            @PathVariable("id") int id,
+            @ModelAttribute User updatedUser,
+            @RequestParam(value = "image", required = false) MultipartFile imageFile
+            ) {
+        return ResponseEntity.ok(userService.updateUser(id, updatedUser, imageFile));
     }
 
     @DeleteMapping("/{id}")

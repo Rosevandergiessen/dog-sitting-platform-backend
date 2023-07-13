@@ -92,11 +92,9 @@ public class DogService {
             }
             Dog savedDog = dogRepository.save(existingDog);
 
-            // Commit the transaction explicitly
             entityManager.flush();
             return savedDog;
         } catch (IOException e) {
-            // Handle the exception accordingly
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Failed to process the image.");
         }
     }
