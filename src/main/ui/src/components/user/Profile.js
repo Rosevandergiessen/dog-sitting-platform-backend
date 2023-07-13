@@ -1,18 +1,35 @@
 import AuthService from "../../services/AuthService";
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 
 export const Profile = () => {
     const currentUser = AuthService.getCurrentUser();
+    const [user, setUser] = useState(false);
     const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [imageFile, setImageFile] = useState(null);
     const [isUpdating, setIsUpdating] = useState(false);
 
+    useEffect(() => {
+        fetchUser();
+    }, []);
+
+    const fetchUser = async () => {
+        try {
+            const response = await fetch(`http://localhost:8080/users/${currentUser.id}`);
+            const data = await response.json();
+            setUser(data);
+            console.log(data);
+        } catch (error) {
+            console.error('Error fetching user:', error);
+        }
+    }
+
     const handleSubmit = async (e) => {
         e.preventDefault();
 
         const formData = new FormData();
+
         formData.append('username', username);
         formData.append('email', email);
         formData.append('password', password);
@@ -45,10 +62,16 @@ export const Profile = () => {
         setIsUpdating(false);
     }
 
-
  return (
      <div>
         <h1>MY PROFILE</h1>
+         {user.imageData && (
+             <img
+                 className="dog-card-image"
+                 src={`data:image/*;base64,${user.imageData}`}
+                 alt="User photo"
+             />
+         )}
         <h3>{currentUser.username.toUpperCase()}</h3>
         <h3>{currentUser.email.toUpperCase()}</h3>
          <>
