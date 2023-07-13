@@ -76,7 +76,7 @@ export const Profile = () => {
                      alt="User photo"
                  />
                  <div className="edit-icon" onClick={openModal}>
-                     <FontAwesomeIcon className="fas fa-pencil-alt" icon={faPencilAlt} />
+                     <FontAwesomeIcon className="fa-pencil-alt" icon={faPencilAlt} />
                  </div>
              </div>
          )}

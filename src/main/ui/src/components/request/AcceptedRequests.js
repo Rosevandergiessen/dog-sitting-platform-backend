@@ -6,6 +6,8 @@ import 'react-big-calendar/lib/css/react-big-calendar.css';
 import { createEvent } from 'ics';
 import AuthService from "../../services/AuthService";
 import '../../styles/Calendar.css'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {faPaw, faPencilAlt} from '@fortawesome/free-solid-svg-icons';
 
 const localizer = momentLocalizer(moment);
 
@@ -122,10 +124,12 @@ export const AcceptedRequests = () => {
             <span className="close" onClick={handleCloseModal}>
               &times;
             </span>
-                        <p>Dog: {selectedRequest.dog.name}</p>
-                        <p>Start Time: {formatTime(selectedRequest.startTime)}</p>
-                        <p>End Time: {formatTime(selectedRequest.endTime)}</p>
-                        <p>Duration: {moment.duration(moment(selectedRequest.endTime)
+                        <FontAwesomeIcon className="fas fa-paw" icon={faPaw} />
+                        <h3>Sitting Details</h3>
+                        <p><span>Dog: </span> {selectedRequest.dog.name}</p>
+                        <p><span>Start Time: </span> {formatTime(selectedRequest.startTime)}</p>
+                        <p><span>End Time: </span> {formatTime(selectedRequest.endTime)}</p>
+                        <p><span>Duration: </span>{moment.duration(moment(selectedRequest.endTime)
                             .diff(moment(selectedRequest.startTime)))
                             .asHours() >= 24 ? moment.duration(moment(selectedRequest.endTime)
                             .diff(moment(selectedRequest.startTime)))
