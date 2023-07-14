@@ -67,7 +67,6 @@ export const Profile = () => {
 
  return (
      <div className="profile-container">
-        <h1>MY PROFILE</h1>
              <div className="profile-picture-container">
                  {user.imageData === null ? (
                      <img

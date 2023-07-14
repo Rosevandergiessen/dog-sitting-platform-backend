@@ -3,7 +3,7 @@ import {Link} from "react-router-dom";
 import moment from "moment";
 import '../../styles/Requests.css'
 
-const UserList = () => {
+const RequestList = () => {
     const [requests, setRequests] = useState([]);
 
     useEffect(() => {
@@ -31,8 +31,7 @@ const UserList = () => {
 
     return (
         <div>
-            <div className="request-container">
-                <h1>ALL REQUESTS</h1>
+            <div>
                 <ul>
                     {requests.map((request) => (
                         <li key={request.id}>
@@ -58,5 +57,4 @@ const UserList = () => {
         </div>
     );
 };
-
-export default UserList;
+export default RequestList;

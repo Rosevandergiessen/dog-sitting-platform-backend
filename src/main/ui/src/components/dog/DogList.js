@@ -55,7 +55,6 @@ const DogList = () => {
 
     return (
         <div className="dog-list-container">
-            <h1>DOGS</h1>
             <div className="dog-grid">
                 {dogs.map((dog) => {
                     const isFriendAdded = userFriends.some((friend) => friend.username === dog.user.username);

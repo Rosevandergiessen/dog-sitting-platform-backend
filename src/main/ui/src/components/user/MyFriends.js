@@ -29,15 +29,13 @@ export const MyFriends = () =>  {
 
     return (
         <>
-            {friends.length === 0 ? (
-                <h3>
-                    YOU DON'T HAVE ANY FRIENDS YET,{" "}
-                    <NavLink to={"/add-a-friend"}>ADD A FRIEND!</NavLink>
-                </h3>
-            ) : (
-                <h1>MY FRIENDS</h1>
-            )}
             <div className="friends-container">
+
+                    {/*<h3>*/}
+                    {/*    YOU DON'T HAVE ANY FRIENDS YET,{" "}*/}
+                    {/*    <NavLink to={"/add-a-friend"}>ADD A FRIEND!</NavLink>*/}
+                    {/*</h3>*/}
+
                 <ul className="friends-list">
                     {friends.map((friend) => (
                         <li key={friend.id}>

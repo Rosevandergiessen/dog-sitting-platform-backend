@@ -8,6 +8,7 @@ export const RegisterForm = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [email, setEmail] = useState('');
+    const [imageFile, setImageFile] = useState(null);
     const navigate = useNavigate();
 
     const handleInputChange = (e) => {
@@ -20,7 +21,7 @@ export const RegisterForm = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        AuthService.register(username, email, password)
+        AuthService.register(username, email, password, imageFile)
         navigate('/get-started');
 
     };

@@ -3,7 +3,9 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    padding-top: 50px;
     margin-bottom: 50px;
+    background-color: #84cead;
 }
 
 .dog-details-container li {
@@ -21,10 +23,6 @@
     margin: 0;
 }
 
-.dog-details-container h3 {
-    margin-top: 50px;
-}
-
 .dog-details-container a {
     text-decoration: none;
 }
@@ -39,4 +37,12 @@
 
 .dog-details-container button:hover {
     background-color: #7f49c9;
+}
+
+.dog-details-container-image {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    border: 2px solid black;
+    margin-bottom: 20px;
 }

@@ -1,10 +1,14 @@
 .dog-list-container {
+    min-height: 80vh;
     height: 100%;
+    padding-top: 40px;
     background-image: url('https://unsplash.com/photos/U6nlG0Y5sfs/download?force=true&w=1700');
     background-position: center center;
 }
 
 .my-dog-list-container {
-    background-image: url('https://unsplash.com/photos/aVTME6WDKqw/download?force=true&w=1700');
-    background-position: bottom center;
+    min-height: 90vh;
+    background-image: url('https://unsplash.com/photos/2l0CWTpcChI/download?force=true&w=1700');
+    background-position: center center;
+    height: 100%
 }

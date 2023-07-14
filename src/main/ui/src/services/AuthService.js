@@ -27,13 +27,17 @@ class AuthService {
         localStorage.removeItem("user");
     }
 
-    register(username, email, password) {
+    register(username, email, password, imageFile) {
+        const formData = new FormData();
+        formData.append('username', username);
+        formData.append('email', email);
+        formData.append('password', password);
+        formData.append('image', imageFile);
+
+
         return fetch(API_URL + "register", {
             method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({ username, email, password }),
+            body: formData,
         })
             .then((response) => {
                 if (!response.ok) {

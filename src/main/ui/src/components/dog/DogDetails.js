@@ -66,12 +66,12 @@ const DogDetails = () => {
             <h1>{dog.name.toUpperCase()}</h1>
             {dog.image && (
                 <img
-                    className="dog-card-image"
+                    className="dog-details-container-image"
                     src={`data:image/*;base64,${dog.image}`}
                     alt="Dog"
                 />
             )}
-
+            <h3>INFO</h3>
             <span>breed</span>
             <p> {dog.breed.toUpperCase()}</p>
             <span>age</span>

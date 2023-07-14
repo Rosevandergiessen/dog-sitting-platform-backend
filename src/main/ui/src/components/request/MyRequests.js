@@ -47,7 +47,6 @@ export const MyRequests = () => {
 
     return (
         <div className="request-container">
-            <h1>My Requests</h1>
             <ul>
                 {filteredRequests.length > 0 ? (
                     filteredRequests.map((request) => (

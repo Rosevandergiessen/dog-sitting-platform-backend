@@ -100,7 +100,6 @@ export const AcceptedRequests = () => {
 
     return (
         <div className="request-container">
-            <h1>Accepted Requests</h1>
             {events.length > 0 ? (
                 <div className="calendar-container">
                     <Calendar

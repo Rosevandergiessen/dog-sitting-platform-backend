@@ -52,8 +52,6 @@ const UserList = () => {
 
     return (
         <div className="user-list">
-            <h2>User List</h2>
-
             <div>
                 {users.map((user) => {
                     const isFriendAdded = userFriends.some((friend) => friend.username === user.username);

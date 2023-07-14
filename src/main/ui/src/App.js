@@ -19,6 +19,7 @@ import {AcceptedRequests} from "./components/request/AcceptedRequests";
 import {MyDogs} from "./components/user/MyDogs";
 import {Logo} from "./components/Logo";
 import {BackButton} from "./components/BackButton";
+import {Header} from "./components/Header";
 
 
 
@@ -28,6 +29,7 @@ export default function App() {
     const showBack = location.pathname !== '/';
     const currentUser = AuthService.getCurrentUser();
     const navigate = useNavigate();
+    const currentPath = location.pathname;
 
     const handleGoBack = () => {
         navigate(-1);
@@ -43,6 +45,7 @@ export default function App() {
             {showBack && (
                 <div className="logo-back-button-container">
                     <BackButton />
+                    <Header currentPath={currentPath}/>
                     <Logo />
                 </div>
             )}
